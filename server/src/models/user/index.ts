@@ -4,16 +4,17 @@ import { Schema } from "mongoose";
 const userSchema = new Schema(
     {
         name: { type: String, required: true },
-        contact_no: String,
+        contactNo: String,
         email: { type: String, required: true },
         password: { type: String, required: true },
-        isactive: Boolean,
-        isdelete: Boolean,
-        recover_code: Number,
-        createdat: Number,
-        updatedat: Number,
-        assign_task: String,
-        created_task: String,
+        isactive: { type: Boolean, default: true },
+        isdelete: { type: Boolean, default: false },
+        recoverCode: Number,
+        assignTask: String,
+        createdTask: String,
+    },
+    {
+        timestamps: true,
     }
 );
 
