@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
+import { MONGO_URI } from "../../../../../config"
+
 
 export const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URL || "", {
+        await mongoose.connect(MONGO_URI || "", {
             dbName: 'taskify'
         });
         console.log('database connected.')

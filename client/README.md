@@ -1,4 +1,4 @@
-# taskify
+# Taskify
 
 An app to keep track of your work.
 
