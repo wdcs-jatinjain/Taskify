@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Taskify",
   description: "App to keep track of your work.",
+  icons: {
+    icon: ['/favicon.ico?v=4']
+  }
 };
 
 export default function RootLayout({
