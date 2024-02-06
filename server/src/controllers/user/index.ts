@@ -1,14 +1,7 @@
-import createUser from '../../views/user/index';
-import { Request, Response } from 'express';
+import express from 'express';
+import createUserController from "./createuser";
+const UserController = express.Router()
 
+UserController.post('/create', createUserController)
 
-
-export default async function createUserController(req: Request, res: Response): Promise<void> {
-    try {
-        const newUser = await createUser(req.body);
-        res.status(201).json(newUser);
-    } catch (error: any) {
-        res.status(400).json({ message: error.message });
-    }
-};
-
+export default UserController;

@@ -12,8 +12,6 @@ app.get('/', (req, res) => {
     res.send('Hello, MongoDB and Express with TypeScript!');
 });
 
-// app.post('/user', createUserController)
-
 app.use("/api", router)
 
 
