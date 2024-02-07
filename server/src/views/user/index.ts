@@ -1,4 +1,8 @@
 
 import createUser from './createuser';
 
-export default createUser;
+const userViews = Object.freeze({
+    createUserViews: createUser
+})
+
+export default userViews;
