@@ -10,7 +10,7 @@ const userSchema = new Schema(
         password: { type: String, required: true },
         isactive: { type: Boolean, default: true },
         isdelete: { type: Boolean, default: false },
-        recoverCode: Number,
+        recoveryCode: String,
         assignTask: String,
         createdTask: String,
     },

@@ -1,13 +1,16 @@
 import Views from "../../views";
 import { createUserValidation } from './userValidations';
+import { registerbody } from "./params/registerbody";
+import { generateRecoveryCode } from "./services";
 
 
+export default async function createUserController({ body: { name, email, password, contactNo } }: { body: registerbody }, res: any) {
 
-export default async function createUserController(req: any, res: any) {
-    const { name, email, password } = req.body
     try {
-        await createUserValidation.validateAsync(req.body, { abortEarly: false });
-        const newUser = await Views.userViews.createUserViews(req, res);
+        const recoveryCode = generateRecoveryCode();
+
+        await createUserValidation.validateAsync({ name, email, password, contactNo }, { abortEarly: false });
+        const newUser = await Views.userViews.createUserViews({ name, email, password, contactNo, recoveryCode });
 
         res.status(201).json(newUser);
     } catch (error: any) {

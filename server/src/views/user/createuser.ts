@@ -1,9 +1,8 @@
+import { registerbody } from '../../controllers/user/params/registerbody';
 import UserModel from '../../models/user/index';
 
 
-export default async function createUser(req: any, res: any) {
-
-    const { name, email, password } = req.body
+export default async function createUser({ name, email, password, contactNo, recoveryCode }: registerbody) {
 
     try {
         const existingUser = await UserModel.findOne({ email });
@@ -14,7 +13,7 @@ export default async function createUser(req: any, res: any) {
             }
 
         }
-        const newUser = await UserModel.create({ name, email, password });
+        const newUser = await UserModel.create({ name, email, password, contactNo, recoveryCode });
         return {
             status: "success",
             message: "User Created successfully"
