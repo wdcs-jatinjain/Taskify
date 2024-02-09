@@ -1,6 +1,6 @@
 import UserModel from '../../models/user/index';
-import { registerbody } from '@/types';
-
+import { registerbody } from '../../types';
+import { RESULT_STATUS } from '../../constants'
 
 export default async function createUser({ name, email, password, contactNo }: registerbody) {
 
@@ -8,7 +8,7 @@ export default async function createUser({ name, email, password, contactNo }: r
         const existingUser = await UserModel.findOne({ email });
         if (existingUser) {
             return {
-                status: "failure",
+                status: RESULT_STATUS.FAILURE,
                 message: "User Already exists"
             }
 
@@ -16,7 +16,7 @@ export default async function createUser({ name, email, password, contactNo }: r
 
         const newUser = await UserModel.create({ name, email, password, contactNo });
         return {
-            status: "success",
+            status: RESULT_STATUS.SUCCESS,
             message: "User Created successfully"
         }
     } catch (error) {
