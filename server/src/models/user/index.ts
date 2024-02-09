@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
+import crypto from 'crypto';
 import { Schema } from "mongoose";
+
 
 const userSchema = new Schema(
     {
@@ -7,9 +9,9 @@ const userSchema = new Schema(
         contactNo: String,
         email: { type: String, required: true },
         password: { type: String, required: true },
-        isactive: { type: Boolean, default: true },
-        isdelete: { type: Boolean, default: false },
-        recoverCode: Number,
+        isActive: { type: Boolean, default: true },
+        isDelete: { type: Boolean, default: false },
+        recoveryCode: { type: String, default: generateRecoveryCode() },
         assignTask: String,
         createdTask: String,
     },
@@ -20,4 +22,11 @@ const userSchema = new Schema(
 
 const UserModel = mongoose.models.User || mongoose.model("User", userSchema);
 
+export function generateRecoveryCode(): string {
+    return crypto.randomBytes(6).toString('hex');
+}
+
 export default UserModel;
+
+
+

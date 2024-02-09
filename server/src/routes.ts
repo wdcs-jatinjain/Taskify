@@ -1,5 +1,7 @@
 import express from "express";
 import connectDB from "./shared/utils/database/mongo/index"
+import router from "./controllers"
+
 
 export const app = express();
 
@@ -9,6 +11,8 @@ connectDB();
 app.get('/', (req, res) => {
     res.send('Hello, MongoDB and Express with TypeScript!');
 });
+
+app.use("/api", router)
 
 
 export default app;
