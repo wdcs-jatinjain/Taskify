@@ -1,8 +1,9 @@
-import { registerbody } from '../../controllers/user/params/registerbody';
+import { generateRecoveryCode } from '../../models/user/index';
+import { registerbody } from '../../type';
 import UserModel from '../../models/user/index';
 
 
-export default async function createUser({ name, email, password, contactNo, recoveryCode }: registerbody) {
+export default async function createUser({ name, email, password, contactNo }: registerbody) {
 
     try {
         const existingUser = await UserModel.findOne({ email });
@@ -13,6 +14,7 @@ export default async function createUser({ name, email, password, contactNo, rec
             }
 
         }
+        const recoveryCode = generateRecoveryCode();
         const newUser = await UserModel.create({ name, email, password, contactNo, recoveryCode });
         return {
             status: "success",

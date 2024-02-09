@@ -3,5 +3,7 @@ export type registerbody = {
     email: string,
     password: string,
     contactNo: string,
-    recoveryCode: string
+    // recoveryCode: string
 }
+
+

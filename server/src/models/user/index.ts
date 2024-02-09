@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
+import crypto from 'crypto';
 
 
 const userSchema = new Schema(
@@ -20,6 +21,10 @@ const userSchema = new Schema(
 );
 
 const UserModel = mongoose.models.User || mongoose.model("User", userSchema);
+
+export function generateRecoveryCode(): string {
+    return crypto.randomBytes(6).toString('hex');
+} 
 
 export default UserModel;
 
