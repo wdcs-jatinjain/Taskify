@@ -1,6 +1,10 @@
 import UserModel from '../../models/user/index';
 import { registerbody } from '../../types';
-import { RESULT_STATUS } from '../../constants'
+import { RESULT_STATUS } from '../../constants';
+import jwt from "jsonwebtoken";
+import { JWT_SECRET_KEY } from '../../../config';
+
+
 
 export default async function createUser({ name, email, password, contactNo }: registerbody) {
 
@@ -15,9 +19,15 @@ export default async function createUser({ name, email, password, contactNo }: r
         }
 
         const newUser = await UserModel.create({ name, email, password, contactNo });
+        const newToken = jwt.sign({ userId: newUser._id }, JWT_SECRET_KEY as string, { expiresIn: '1h' });
+
         return {
             status: RESULT_STATUS.SUCCESS,
-            message: "User Created successfully"
+            message: "User Created successfully",
+            data: {
+                userId: newUser._id,
+                token: newToken
+            }
         }
     } catch (error) {
         console.error("🚀 ~ createUser ~ error:", error)
