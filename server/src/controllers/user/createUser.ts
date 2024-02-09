@@ -1,9 +1,10 @@
+import { Response } from "express";
 import Views from "../../views";
 import { createUserValidation } from './userValidations';
 import { registerbody } from "../../types";
 
 
-export default async function createUserController({ body: { name, email, password, contactNo } }: { body: registerbody }, res: any) {
+export default async function createUserController({ body: { name, email, password, contactNo } }: { body: registerbody }, res: Response) {
 
     try {
         await createUserValidation.validateAsync({ name, email, password, contactNo }, { abortEarly: false });
