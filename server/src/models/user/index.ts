@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { Schema } from "mongoose";
 import crypto from 'crypto';
+import { Schema } from "mongoose";
 
 
 const userSchema = new Schema(
@@ -11,7 +11,7 @@ const userSchema = new Schema(
         password: { type: String, required: true },
         isactive: { type: Boolean, default: true },
         isdelete: { type: Boolean, default: false },
-        recoveryCode: String,
+        recoveryCode: { type: String, default: generateRecoveryCode() },
         assignTask: String,
         createdTask: String,
     },
@@ -24,7 +24,7 @@ const UserModel = mongoose.models.User || mongoose.model("User", userSchema);
 
 export function generateRecoveryCode(): string {
     return crypto.randomBytes(6).toString('hex');
-} 
+}
 
 export default UserModel;
 

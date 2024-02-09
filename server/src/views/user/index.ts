@@ -1,4 +1,3 @@
-
 import createUser from './createuser';
 
 const userViews = Object.freeze({

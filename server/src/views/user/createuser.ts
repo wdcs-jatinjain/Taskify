@@ -1,6 +1,5 @@
-import { generateRecoveryCode } from '../../models/user/index';
-import { registerbody } from '../../types';
 import UserModel from '../../models/user/index';
+import { registerbody } from '@/types';
 
 
 export default async function createUser({ name, email, password, contactNo }: registerbody) {
@@ -14,8 +13,8 @@ export default async function createUser({ name, email, password, contactNo }: r
             }
 
         }
-        const recoveryCode = generateRecoveryCode();
-        const newUser = await UserModel.create({ name, email, password, contactNo, recoveryCode });
+
+        const newUser = await UserModel.create({ name, email, password, contactNo });
         return {
             status: "success",
             message: "User Created successfully"
