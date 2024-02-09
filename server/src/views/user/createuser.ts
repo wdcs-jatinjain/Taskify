@@ -1,5 +1,5 @@
 import { generateRecoveryCode } from '../../models/user/index';
-import { registerbody } from '../../type';
+import { registerbody } from '../../types';
 import UserModel from '../../models/user/index';
 
 
