@@ -1,9 +1,13 @@
-
+import RegistrationPage from "./registration";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      welcome to the Taskify
-    </main>
+    <>
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <div>
+          <RegistrationPage />
+        </div>
+      </main>
+    </>
   );
 }
