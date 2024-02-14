@@ -2,7 +2,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { registerUserValidation } from '../registration/validation';
+import { registerUserValidation } from '@/app/register/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 
@@ -24,7 +24,7 @@ export default function RegistrationForm() {
             const responseData = await response.json();
             if (responseData.status === 'Success') {
                 console.log('Registration successful');
-                router.push('/home');
+                router.push('/Dashboard');
             } else {
                 console.log('Registration failed');
             }

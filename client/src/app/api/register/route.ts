@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { API_URL } from "../../../config"
-import { registerUserValidation } from "../../registration/validation";
+import { registerUserValidation } from "../../register/validation";
 
 
 export async function POST(req: Request) {
