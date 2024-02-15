@@ -12,6 +12,7 @@ export default function RegistrationForm() {
 
     const onSubmit = async (data: any) => {
         try {
+            await registerUserValidation.isValidSync({ ...data }, { abortEarly: false });
 
             const response = await fetch('api/register', {
                 method: 'POST',
@@ -22,9 +23,11 @@ export default function RegistrationForm() {
             });
 
             const responseData = await response.json();
+            console.log("🚀 ~ onSubmit ~ responseData:", responseData)
+
             if (responseData.status === 'Success') {
                 console.log('Registration successful');
-                router.push('/Dashboard');
+                router.push('/');
             } else {
                 console.log('Registration failed');
             }
