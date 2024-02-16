@@ -27,7 +27,7 @@ export default function RegistrationForm() {
 
             if (responseData.status === 'Success') {
                 console.log('Registration successful');
-                router.push('/');
+                router.push('/task');
             } else {
                 console.log('Registration failed');
             }
@@ -40,7 +40,7 @@ export default function RegistrationForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                    Name
+                    Name*
                 </label>
                 <input
                     {...register('name')}
@@ -54,7 +54,7 @@ export default function RegistrationForm() {
             </div>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                    Email
+                    Email*
                 </label>
                 <input
                     {...register('email')}
@@ -67,7 +67,7 @@ export default function RegistrationForm() {
             </div>
             <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                    Password
+                    Password*
                 </label>
                 <input
                     {...register('password')}
@@ -90,6 +90,7 @@ export default function RegistrationForm() {
                     type="text"
                     placeholder="Contact No"
                 />
+                <span className="text-red-500">{errors.password?.message}</span>
             </div>
             <div className="flex items-center justify-between">
                 <button
