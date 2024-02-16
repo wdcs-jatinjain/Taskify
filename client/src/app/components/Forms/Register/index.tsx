@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { registerUserValidation } from '@/app/register/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { RESULT_STATUS } from '@/constants';
 
 
 export default function RegistrationForm() {
@@ -23,13 +24,11 @@ export default function RegistrationForm() {
             });
 
             const responseData = await response.json();
-            console.log("🚀 ~ onSubmit ~ responseData:", responseData)
 
-            if (responseData.status === 'Success') {
-                console.log('Registration successful');
+            if (responseData.status === RESULT_STATUS.SUCCESS) {
                 router.push('/task');
             } else {
-                console.log('Registration failed');
+                console.log(RESULT_STATUS.FAILURE);
             }
         } catch (error) {
             console.error('Error registering user:', error);
