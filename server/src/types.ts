@@ -5,4 +5,9 @@ export type registerbody = {
     contactNo: string,
 }
 
+export type loginbody = {
+    email: string,
+    password: string,
+}
+
 
