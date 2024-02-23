@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export const middleware = (request: NextRequest) => {
     const token = cookies().get('token') || ''
     if (token) {
-        return NextResponse.rewrite(new URL('/task', request.url))
+        return NextResponse.rewrite(new URL('/', request.url))
     } else {
         return NextResponse.rewrite(new URL('/', request.url))
     }

@@ -1,5 +1,8 @@
 "use client"
-import React from 'react';
+import React, { useState } from 'react';
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
+
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { registerUserValidation } from '@/app/register/validation';
@@ -8,10 +11,16 @@ import { RESULT_STATUS } from '@/constants';
 
 
 export default function RegistrationForm() {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
     const router = useRouter();
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(registerUserValidation) })
 
     const onSubmit = async (data: any) => {
+
         try {
             await registerUserValidation.isValidSync({ ...data }, { abortEarly: false });
 
@@ -26,7 +35,7 @@ export default function RegistrationForm() {
             const responseData = await response.json();
 
             if (responseData.status === RESULT_STATUS.SUCCESS) {
-                router.push('/task');
+                router.push('/');
             } else {
                 console.log(RESULT_STATUS.FAILURE);
             }
@@ -68,16 +77,27 @@ export default function RegistrationForm() {
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                     Password*
                 </label>
-                <input
-                    {...register('password')}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password"
-                    type="password"
-                    placeholder="******************"
-                />
-                <span className="text-red-500">{errors.password?.message}</span>
+                <div className="relative">
+                    <input
+                        {...register('password')}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                        id="password"
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="******************"
+                    />
+                    <span className="absolute inset-y-0 right-0 flex items-center pr-3">
+                        {showPassword ? (
+                            <FaRegEye onClick={togglePasswordVisibility} style={{ color: 'black' }} className="text-gray-500 cursor-pointer" />
+                        ) : (
+                            <FaRegEyeSlash onClick={togglePasswordVisibility} style={{ color: 'black' }} className="text-gray-500 cursor-pointer" />
+                        )}
+                    </span>
+                    <span className="text-red-500">{errors.password?.message}</span>
 
+                </div>
             </div>
+
+
             <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="contactNo">
                     Contact No

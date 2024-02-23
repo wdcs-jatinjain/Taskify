@@ -10,4 +10,14 @@ const createUserValidation = Joi.object({
     createdTask: Joi.string(),
 });
 
+const loginUserValidation = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/)).required(),
+});
+
+
+
+export { loginUserValidation };
+
+
 export { createUserValidation };

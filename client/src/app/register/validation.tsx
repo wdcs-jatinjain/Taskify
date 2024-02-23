@@ -10,4 +10,15 @@ const registerUserValidation = yup.object().shape({
     createdTask: yup.string(),
 });
 
+const loginUserValidation = yup.object().shape({
+    email: yup.string().min(3, 'must be at least 3 characters long').email('must be a valid email').required(),
+    password: yup.string().matches(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/)).required('1 special character,Number & Alphabate'),
+
+})
+
+
+
+
+
+export { loginUserValidation };
 export { registerUserValidation };

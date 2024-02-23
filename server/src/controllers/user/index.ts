@@ -5,6 +5,6 @@ import loginUserController from './loginUser';
 const UserController = express.Router()
 
 UserController.post('/create', createUserController)
-UserController.get('/login', loginUserController)
+UserController.post('/login', loginUserController)
 
 export default UserController;
