@@ -3,7 +3,7 @@ export type responseData = {
     message: string,
     data: {
         userId: string,
-        token: string,
+        token?: string,
     }
 }
 

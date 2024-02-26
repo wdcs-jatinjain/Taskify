@@ -9,6 +9,8 @@ import { JWT_SECRET_KEY } from "../../../config";
 export default async function loginUser({ email, password }: loginbody) {
 
     try {
+
+
         const existingUser = await UserModel.findOne({ email });
 
         if (!existingUser) {
@@ -28,6 +30,7 @@ export default async function loginUser({ email, password }: loginbody) {
 
 
         const token = jwt.sign({ userId: existingUser._id }, JWT_SECRET_KEY as string, { expiresIn: '1h' });  // Generate JWT token
+        console.log("🚀 ~ loginUser ~ token:", token)
 
         return {
             status: RESULT_STATUS.SUCCESS,

@@ -1,14 +1,17 @@
 import React from 'react'
 import LoginFormComponent from '../components/Forms/Login'
+import AuthLayout from '../layouts/auth'
 
 const LoginPage = () => {
     return (
 
-        <div className="w-full max-w-xs mx-auto mt-36 h-36 items-center">
-            <h1 className="text-center text-xl font-bold mb-4">Login</h1>
-            <LoginFormComponent />
-        </div>
+        <AuthLayout >
+            < div className="w-full max-w-xs mx-auto mt-36 h-36 items-center">
+                <h1 className="text-center text-xl font-bold mb-4">Login</h1>
+                <LoginFormComponent />
+            </div >
+        </AuthLayout>
     )
 }
 
-export default LoginPage
+export default LoginPage;

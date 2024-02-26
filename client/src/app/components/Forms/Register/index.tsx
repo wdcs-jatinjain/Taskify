@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import { registerUserValidation } from '@/app/register/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RESULT_STATUS } from '@/constants';
+import { NextResponse } from 'next/server';
+import Link from 'next/link';
 
 
 export default function RegistrationForm() {
@@ -36,8 +38,10 @@ export default function RegistrationForm() {
 
             if (responseData.status === RESULT_STATUS.SUCCESS) {
                 router.push('/');
+                return NextResponse.json(data);
             } else {
                 console.log(RESULT_STATUS.FAILURE);
+                return NextResponse.error()
             }
         } catch (error) {
             console.error('Error registering user:', error);
@@ -118,6 +122,10 @@ export default function RegistrationForm() {
                 >
                     Register
                 </button>
+            </div>
+            <div className='flex items-center justify-center text-sm mt-6'>
+
+                <p className='text-black'>Already have an account <Link href={"login"} className='text-blue-500'>Login now!</Link></p>
             </div>
         </form>
     );

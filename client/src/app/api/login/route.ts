@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
     try {
         const { email, password } = await req.json()
-     
+
         const response = await fetch(`${API_URL}/user/login`, {
             method: 'POST',
             headers: {
@@ -16,11 +16,9 @@ export async function POST(req: Request) {
         });
         const data: responseData = await response.json()
 
-        cookies().set('token', data.data.token)
-
         return NextResponse.json(data)
     } catch (error) {
-        console.error('Error registering user:', error);
+        console.error('Error loging user:', error);
 
     }
 }

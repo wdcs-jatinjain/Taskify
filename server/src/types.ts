@@ -8,6 +8,7 @@ export type registerbody = {
 export type loginbody = {
     email: string,
     password: string,
+    token?: string
 }
 
 
