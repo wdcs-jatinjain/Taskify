@@ -1,12 +1,20 @@
 'use client'
-import Link from 'next/link'
 import React from 'react'
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+
 
 
 const Navbar = () => {
+
+    const router = useRouter()
+    const handleLogout = async () => {
+        await fetch("/api/logout");
+        router.push("/login");
+    }
     return (
         <>
-            <header className="text-gray-700 body-font">
+            <header className=" body-font">
                 <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                     <a className="flex title-font font-medium items-center text-gray-300 mb-4 md:mb-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
@@ -14,16 +22,22 @@ const Navbar = () => {
                         </svg>
                         <span className="ml-3 text-xl">TASKIFY</span>
                     </a>
-                    <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                    <nav className="md:ml-auto flex flex-wrap space-x-3 items-center text-base justify-center">
+                        <div className="hidden sm:ml-6 sm:block">
+                            <div className="flex  ">
 
+                                <Link href={"/task"} className="inline-flex pl-2 text-white items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 hover:text-gray-600 rounded text-base mt-4 md:mt-0" aria-current="page">Tasks</Link>
+
+                            </div>
+                        </div>
+                        <div>
+                            <button onClick={handleLogout} className="inline-flex text-white items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 hover:text-gray-600 rounded text-base mt-4 md:mt-0">Log out
+                                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </nav>
-                    <Link href={"/login"}>
-                        <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Log In
-                            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                    </Link>
                 </div>
             </header>
 

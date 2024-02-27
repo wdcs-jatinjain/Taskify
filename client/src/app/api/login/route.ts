@@ -15,7 +15,15 @@ export async function POST(req: Request) {
             body: JSON.stringify({ email, password })
         });
         const data: responseData = await response.json()
-
+        if (data.status === 'Success') {
+            cookies().set('token', data?.data?.token as string)
+            return NextResponse.json(data)
+        } else {
+            return NextResponse.json({
+                status: "Failure",
+                message: "Something went wrong while creating user"
+            })
+        }
         return NextResponse.json(data)
     } catch (error) {
         console.error('Error loging user:', error);

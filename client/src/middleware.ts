@@ -1,22 +1,17 @@
-
-import { cookies } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
-
-
-export const middleware = (request: NextRequest) => {
-    const token = cookies().get('token') || ''
-    if (!token) {
-        if (request.url !== '/login' && request.url !== '/register') {
-            return NextResponse.redirect(new URL('/login', request.url));
-        }
-    } else {
-        if (request.url === '/login' || request.url === '/register') {
-            return NextResponse.redirect(new URL('/', request.url));
-        }
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+export function middleware(request: NextRequest) {
+    const token = cookies().get("token");
+    const path = request.nextUrl.pathname;
+    const isPublicPath = path === "/login" || path === '/register';
+    if (isPublicPath && token) {
+        return NextResponse.redirect(new URL("/task", request.nextUrl));
     }
-
-
-};
-export const config = {
-    matcher: ['/'],
+    if (!isPublicPath && !token) {
+        return NextResponse.redirect(new URL("/login", request.nextUrl));
+    }
 }
+export const config = {
+    matcher: ["/login", "/task", "/register"],
+};

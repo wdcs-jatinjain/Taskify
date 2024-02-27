@@ -20,6 +20,7 @@ export default function RegistrationForm() {
     };
     const router = useRouter();
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(registerUserValidation) })
+    console.log("🚀 ~ RegistrationForm ~ errors:", errors)
 
     const onSubmit = async (data: any) => {
 
@@ -37,7 +38,7 @@ export default function RegistrationForm() {
             const responseData = await response.json();
 
             if (responseData.status === RESULT_STATUS.SUCCESS) {
-                router.push('/');
+                router.push('/task');
                 return NextResponse.json(data);
             } else {
                 console.log(RESULT_STATUS.FAILURE);

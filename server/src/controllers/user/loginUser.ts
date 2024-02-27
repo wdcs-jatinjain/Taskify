@@ -6,10 +6,10 @@ import { loginUserValidation } from "./userValidations";
 export default async function loginUserController({ body: { email, password } }: { body: loginbody }, res: Response) {
     try {
         await loginUserValidation.validateAsync({ email, password }, { abortEarly: false })
-        const loginUser = await Views.userViews.loginUserViews({ email, password })
-        
+        const loginUserViewsRes = await Views.userViews.loginUserViews({ email, password })
 
-        res.status(200).json(loginUser)
+
+        res.status(200).json(loginUserViewsRes)
     } catch (error: any) {
         res.status(400).json({ message: error.message });
     }

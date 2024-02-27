@@ -16,10 +16,16 @@ export async function POST(req: Request) {
             body: JSON.stringify({ name, email, password, contactNo })
         });
         const data: responseData = await response.json()
+        if (data.status === 'Success') {
+            cookies().set('token', data?.data?.token as string)
+            return NextResponse.json(data)
+        } else {
+            return NextResponse.json({
+                status: "Failure",
+                message: "Something went wrong while creating user"
+            })
+        }
 
-        cookies().set('token', data.data.token)
-
-        return NextResponse.json(data)
     } catch (error) {
         console.error('Error registering user:', error);
 

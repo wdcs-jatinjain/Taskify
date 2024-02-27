@@ -8,9 +8,9 @@ export default async function createUserController({ body: { name, email, passwo
 
     try {
         await createUserValidation.validateAsync({ name, email, password, contactNo }, { abortEarly: false });
-        const newUser = await Views.userViews.createUserViews({ name, email, password, contactNo });
+        const createUserViewsRes = await Views.userViews.createUserViews({ name, email, password, contactNo });
 
-        res.status(201).json(newUser);
+        res.status(201).json(createUserViewsRes);
     } catch (error: any) {
         res.status(400).json({ message: error.message });
     }

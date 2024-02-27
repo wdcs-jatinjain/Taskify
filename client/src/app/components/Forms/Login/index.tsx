@@ -37,7 +37,7 @@ const LoginFormComponent = () => {
 
                 const token = responseData.data.token;
                 document.cookie = `token=${token}; path=/`;
-                router.push('/')
+                router.push('/task')
 
                 return NextResponse.json(data);
             }

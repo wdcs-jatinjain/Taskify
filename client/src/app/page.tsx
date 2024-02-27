@@ -1,9 +1,9 @@
-import Dashoard from "./components/Dashboard";
+import Task from "./task/page";
 
 export default function Home() {
   return (
     <>
-      <Dashoard />
+      <Task />
     </>
   );
 }
