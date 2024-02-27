@@ -6,10 +6,15 @@ import { NextRequest, NextResponse } from 'next/server';
 export const middleware = (request: NextRequest) => {
     const token = cookies().get('token') || ''
     if (!token) {
-        return NextResponse.redirect(new URL('/login', request.url))
+        if (request.url !== '/login' && request.url !== '/register') {
+            return NextResponse.redirect(new URL('/login', request.url));
+        }
     } else {
-        return NextResponse.rewrite(new URL('/', request.url))
+        if (request.url === '/login' || request.url === '/register') {
+            return NextResponse.redirect(new URL('/', request.url));
+        }
     }
+
 
 };
 export const config = {

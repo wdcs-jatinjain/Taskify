@@ -113,7 +113,7 @@ export default function RegistrationForm() {
                     type="text"
                     placeholder="Contact No"
                 />
-                <span className="text-red-500">{errors.password?.message}</span>
+                <span className="text-red-500">{errors.contactNo?.message}</span>
             </div>
             <div className="flex items-center justify-between">
                 <button
