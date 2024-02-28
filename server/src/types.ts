@@ -12,3 +12,26 @@ export type loginbody = {
 }
 
 
+export type addtaskbody = {
+    title: string,
+    description: string,
+    catagory: string,
+    status: string,
+    priority: string
+}
+export type edittaskbody = {
+    id: string,
+    title: string,
+    description: string,
+    catagory: string,
+    status: string,
+    priority: string
+}
+
+export type deletetaskbody = {
+    id: string
+}
+export type getonetaskbody = {
+    id: string
+}
+

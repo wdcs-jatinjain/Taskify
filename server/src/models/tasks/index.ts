@@ -1,3 +1,4 @@
+import { boolean } from "joi";
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
@@ -12,7 +13,8 @@ const taskSchema = new Schema(
         },
         priority: { type: String, enum: ['high', 'medium', 'low'], default: 'medium' },
         estimateTime: String,
-        inprogressTime: String
+        inprogressTime: String,
+        isDeleted: { type: Boolean, default: false },
     }, {
     timestamps: true,
 }
