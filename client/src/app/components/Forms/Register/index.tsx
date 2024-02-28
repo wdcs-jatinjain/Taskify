@@ -20,7 +20,6 @@ export default function RegistrationForm() {
     };
     const router = useRouter();
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(registerUserValidation) })
-    console.log("🚀 ~ RegistrationForm ~ errors:", errors)
 
     const onSubmit = async (data: any) => {
 
@@ -53,7 +52,7 @@ export default function RegistrationForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                    Name*
+                    Name<span className='text-red-500' >*</span>
                 </label>
                 <input
                     {...register('name')}
@@ -67,7 +66,7 @@ export default function RegistrationForm() {
             </div>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                    Email*
+                    Email<span className='text-red-500' >*</span>
                 </label>
                 <input
                     {...register('email')}
@@ -80,7 +79,7 @@ export default function RegistrationForm() {
             </div>
             <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                    Password*
+                    Password<span className='text-red-500' >*</span>
                 </label>
                 <div className="relative">
                     <input
@@ -90,7 +89,7 @@ export default function RegistrationForm() {
                         type={showPassword ? 'text' : 'password'}
                         placeholder="******************"
                     />
-                    <span className="absolute inset-y-0 right-0 flex items-center pr-3">
+                    <span className="absolute inset-y-0 right-0 flex mt-3 pr-3">
                         {showPassword ? (
                             <FaRegEye onClick={togglePasswordVisibility} style={{ color: 'black' }} className="text-gray-500 cursor-pointer" />
                         ) : (
@@ -105,7 +104,7 @@ export default function RegistrationForm() {
 
             <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="contactNo">
-                    Contact No
+                    Contact No<span className='text-red-500' >*</span>
                 </label>
                 <input
                     {...register('contactNo')}

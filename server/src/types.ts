@@ -17,7 +17,8 @@ export type addtaskbody = {
     description: string,
     catagory: string,
     status: string,
-    priority: string
+    priority: string,
+    userId: string
 }
 export type edittaskbody = {
     id: string,

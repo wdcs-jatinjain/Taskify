@@ -35,8 +35,7 @@ const LoginFormComponent = () => {
 
             if (responseData.status === RESULT_STATUS.SUCCESS) {
 
-                const token = responseData.data.token;
-                document.cookie = `token=${token}; path=/`;
+
                 router.push('/task')
 
                 return NextResponse.json(data);
@@ -57,15 +56,15 @@ const LoginFormComponent = () => {
 
 
     return (
-        <div>
+        <div className=''>
 
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col align-middle bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md">
+                className="grid grid-cols-1 gap-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md">
 
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                        Email*
+                        Email <span className='text-red-500'>*</span>
                     </label>
                     <input
                         {...register('email')}
@@ -78,7 +77,7 @@ const LoginFormComponent = () => {
                 </div>
                 <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                        Password*
+                        Password <span className='text-red-500'>*</span>
                     </label>
                     <div className="relative">
                         <input
@@ -86,9 +85,9 @@ const LoginFormComponent = () => {
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             id="password"
                             type={showPassword ? 'text' : 'password'}
-                            placeholder="******************"
+                            placeholder="password"
                         />
-                        <span className="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <span className="absolute inset-y-0 right-0 flex mt-3 pr-3">
                             {showPassword ? (
                                 <FaRegEye onClick={togglePasswordVisibility} style={{ color: 'black' }} className="text-gray-500 cursor-pointer" />
                             ) : (
@@ -111,9 +110,9 @@ const LoginFormComponent = () => {
 
                     {errorMessage && <p className='text-red-400'>{errorMessage}</p>}
                 </div>
-                <div className='flex items-center justify-center text-sm mt-6'>
+                <div className='flex items-center justify-center text-sm mt-4'>
 
-                    <p className='text-black'> {"Don't have an account"} <Link href={"register"} className='text-blue-500'>register now!</Link></p>
+                    <p className='text-black'> {"Don't have an account?"} <Link href={"register"} className='text-blue-500'>register now!</Link></p>
                 </div>
 
             </form>

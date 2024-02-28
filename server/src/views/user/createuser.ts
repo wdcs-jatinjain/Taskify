@@ -24,10 +24,9 @@ export default async function createUser({ name, email, password, contactNo }: r
         return {
             status: RESULT_STATUS.SUCCESS,
             message: "User Created successfully",
-            data: {
-                userId: newUser._id,
-                token: newToken
-            }
+            userId: newUser._id,
+            token: newToken
+
         }
     } catch (error) {
         console.error("🚀 ~ createUser ~ error:", error)

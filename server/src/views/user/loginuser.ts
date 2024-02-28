@@ -34,10 +34,9 @@ export default async function loginUser({ email, password }: loginbody) {
         return {
             status: RESULT_STATUS.SUCCESS,
             message: "Login successful",
-            data: {
-                userId: existingUser._id,
-                token: token
-            }
+            userId: existingUser._id,
+            token: token
+
         };
     } catch (error: any) {
         console.error("🚀 ~ loginUser ~ error:", error)

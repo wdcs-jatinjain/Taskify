@@ -9,21 +9,21 @@ const Tasks: React.FC = () => {
 
 
     return <MainLayout>
-        < div className="text-gray-200 body-font">
+        < div className="text-black-200 body-font h-screen">
             <div className="container px-5 py-24 mx-auto">
                 <div className="flex flex-col text-center w-full mb-20">
-                    <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-200">Tasks</h1>
+                    <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-indigo-600">Tasks</h1>
                     <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Keep track of your work!</p>
                 </div>
                 <div className="lg:w-2/3 w-full mx-auto overflow-auto">
                     <table className="table-auto w-full text-left whitespace-no-wrap">
                         <thead>
                             <tr>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">title</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">catagory</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">status</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">priority</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tl rounded-bl">title</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">catagory</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">status</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">priority</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200"></th>
 
                             </tr>
                         </thead>
@@ -37,27 +37,27 @@ const Tasks: React.FC = () => {
 
                             </tr>
                             <tr>
-                                <td className="border-t-2 border-gray-200 px-4 py-3">Pro</td>
-                                <td className="border-t-2 border-gray-200 px-4 py-3">25 Mb/s</td>
-                                <td className="border-t-2 border-gray-200 px-4 py-3">25 GB</td>
-                                <td className="border-t-2 border-gray-200 px-4 py-3 text-">$24</td>
-                                <td className="border-t-2 border-gray-200 px-4 py-3 text-lg "><FiEdit3 /></td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3">Pro</td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3">25 Mb/s</td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3">25 GB</td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3 text-">$24</td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3 text-lg "><FiEdit3 /></td>
 
                             </tr>
                             <tr>
-                                <td className="border-t-2 border-gray-200 px-4 py-3">Business</td>
-                                <td className="border-t-2 border-gray-200 px-4 py-3">36 Mb/s</td>
-                                <td className="border-t-2 border-gray-200 px-4 py-3">40 GB</td>
-                                <td className="border-t-2 border-gray-200 px-4 py-3 text-lg ">$50</td>
-                                <td className="border-t-2 border-gray-200 px-4 py-3 text-lg "><FiEdit3 /></td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3">Business</td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3">36 Mb/s</td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3">40 GB</td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3 text-lg ">$50</td>
+                                <td className="border-t-2 border-gray-400 px-4 py-3 text-lg "><FiEdit3 /></td>
 
                             </tr>
                             <tr>
-                                <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">Exclusive</td>
-                                <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">48 Mb/s</td>
-                                <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">120 GB</td>
-                                <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg ">$72</td>
-                                <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg "><FiEdit3 /></td>
+                                <td className="border-t-2 border-b-2 border-gray-400 px-4 py-3">Exclusive</td>
+                                <td className="border-t-2 border-b-2 border-gray-400 px-4 py-3">48 Mb/s</td>
+                                <td className="border-t-2 border-b-2 border-gray-400 px-4 py-3">120 GB</td>
+                                <td className="border-t-2 border-b-2 border-gray-400 px-4 py-3 text-lg ">$72</td>
+                                <td className="border-t-2 border-b-2 border-gray-400 px-4 py-3 text-lg "><FiEdit3 /></td>
 
                             </tr>
                         </tbody>

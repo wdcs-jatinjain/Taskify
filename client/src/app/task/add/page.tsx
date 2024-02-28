@@ -20,14 +20,14 @@ const AddTaskPage: React.FC = () => {
 
 
     return (
-        <div className="container mx-auto px-8 py-8">
+        <div className="container mx-auto px-8 py-8 h-screen">
             <h2 className="text-2xl font-medium mb-4">Add Task</h2>
             <div className='mx-auto px-20 py-8'>
 
 
                 <form onSubmit={(e) => { e.preventDefault(); handleAddTask(); }}>
                     <div className="mb-4">
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-300">Title</label>
+                        <label htmlFor="title" className="block text-sm font-medium text-black">Title</label>
                         <input
                             type="text"
                             id="title"
@@ -37,7 +37,7 @@ const AddTaskPage: React.FC = () => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="category" className="block text-sm font-medium text-gray-300">Category</label>
+                        <label htmlFor="category" className="block text-sm font-medium text-black">Category</label>
                         <input
                             type="text"
                             id="category"
@@ -48,7 +48,7 @@ const AddTaskPage: React.FC = () => {
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-4">
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label htmlFor="status" className="block text-sm font-medium text-gray-300">Status</label>
+                            <label htmlFor="status" className="block text-sm font-medium text-black">Status</label>
                             <select
                                 id="status"
                                 className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
@@ -62,7 +62,7 @@ const AddTaskPage: React.FC = () => {
                             </select>
                         </div>
                         <div className="w-full md:w-1/2 px-3">
-                            <label htmlFor="priority" className="block text-sm font-medium text-gray-300">Priority</label>
+                            <label htmlFor="priority" className="block text-sm font-medium text-black">Priority</label>
                             <select
                                 id="priority"
                                 className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
