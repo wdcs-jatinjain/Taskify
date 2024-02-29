@@ -12,6 +12,7 @@ const userSchema = new Schema(
         isActive: { type: Boolean, default: true },
         isDelete: { type: Boolean, default: false },
         recoveryCode: { type: String, default: generateRecoveryCode() },
+        catagory: { type: String, required: true },
         assignTask: String,
         createdTask: String,
     },

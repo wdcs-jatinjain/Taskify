@@ -18,6 +18,7 @@ export async function POST(req: Request) {
         const LoginData: LoginDataType = await loginRes.json()
         if (LoginData.status === RESULT_STATUS.SUCCESS) {
             cookies().set('token', LoginData?.token as string)
+            cookies().set('id', LoginData?.userId as string)
             return NextResponse.json(LoginData)
         } else {
             return NextResponse.json({

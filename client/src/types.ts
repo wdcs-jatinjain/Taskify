@@ -16,3 +16,11 @@ export type LoginDataType = {
 
 }
 
+export type addTaskDataType = {
+    title: string,
+    description: string,
+    subCatagory: string,
+    status: string,
+    priority: string,
+}
+

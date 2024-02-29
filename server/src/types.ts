@@ -3,6 +3,7 @@ export type registerbody = {
     email: string,
     password: string,
     contactNo: string,
+    catagory: string,
 }
 
 export type loginbody = {
@@ -15,7 +16,7 @@ export type loginbody = {
 export type addtaskbody = {
     title: string,
     description: string,
-    catagory: string,
+    subCatagory: string,
     status: string,
     priority: string,
     userId: string
@@ -34,5 +35,14 @@ export type deletetaskbody = {
 }
 export type getonetaskbody = {
     id: string
+}
+export type addcatagorybody = {
+    name: string,
+    subcategories: subcatagorybody
+}
+
+export type subcatagorybody = {
+    id: Number,
+    name: string
 }
 

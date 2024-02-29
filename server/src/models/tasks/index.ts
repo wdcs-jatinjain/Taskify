@@ -1,4 +1,3 @@
-import { boolean } from "joi";
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
@@ -6,8 +5,9 @@ const taskSchema = new Schema(
     {
         title: { type: String, required: true },
         description: String,
-        catagory: { type: String, required: true },
+        subCatagory: { type: String, required: true },
         userId: mongoose.Types.ObjectId,
+        assignUserId: mongoose.Types.ObjectId,
         status: {
             type: String, enum: ['ToDo', 'In Progress', 'On Hold', 'Cancelled', 'Completed'], default: 'ToDo'
         },

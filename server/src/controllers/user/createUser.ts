@@ -4,11 +4,11 @@ import { createUserValidation } from './userValidations';
 import { registerbody } from "../../types";
 
 
-export default async function createUserController({ body: { name, email, password, contactNo } }: { body: registerbody }, res: Response) {
+export default async function createUserController({ body: { name, email, password, contactNo, catagory } }: { body: registerbody }, res: Response) {
 
     try {
-        await createUserValidation.validateAsync({ name, email, password, contactNo }, { abortEarly: false });
-        const createUserViewsRes = await Views.userViews.createUserViews({ name, email, password, contactNo });
+        await createUserValidation.validateAsync({ name, email, password, contactNo, catagory }, { abortEarly: false });
+        const createUserViewsRes = await Views.userViews.createUserViews({ name, email, password, contactNo, catagory });
 
         res.status(201).json(createUserViewsRes);
     } catch (error: any) {
