@@ -16,6 +16,7 @@ const AddTaskPage: React.FC = () => {
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
+    const [catagory, setCatagory] = useState<string>('');
     const [subCatagory, setSubCatagory] = useState<string>('');
     const [status, setStatus] = useState<string>('');
     const [priority, setPriority] = useState<string>('');
@@ -30,9 +31,10 @@ const AddTaskPage: React.FC = () => {
     const taskData = {
         title,
         description,
+        catagory,
         subCatagory,
         status,
-        priority
+        priority,
     };
 
 
@@ -43,7 +45,6 @@ const AddTaskPage: React.FC = () => {
 
 
         try {
-            // console.log("🚀 ~ handleAddTask ~ taskData:", taskData)
 
             const response = await fetch(`/api/task/create`, {
                 method: 'POST',
@@ -52,10 +53,8 @@ const AddTaskPage: React.FC = () => {
                 },
                 body: JSON.stringify(taskData)
             });
-            console.log("🚀 ~ handleAddTask ~ taskData:", taskData)
 
             const responseData = await response.json();
-            // console.log("🚀 ~ handleAddTask ~ responseData:", responseData)
 
             if (responseData.status === RESULT_STATUS.SUCCESS) {
                 router.push('/task');
@@ -102,7 +101,17 @@ const AddTaskPage: React.FC = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label htmlFor="subCatagory" className="block text-sm font-medium text-black">Category</label>
+                            <label htmlFor="catagory" className="block text-sm font-medium text-black">Category</label>
+                            <input
+                                type="text"
+                                id="catagory"
+                                className="mt-1 p-2 border  text-black border-gray-300 rounded-md w-full"
+                                value={catagory}
+                                onChange={(e) => setCatagory(e.target.value)}
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="subCatagory" className="block text-sm font-medium text-black">subCategory</label>
                             <input
                                 type="text"
                                 id="subCatagory"
@@ -121,9 +130,11 @@ const AddTaskPage: React.FC = () => {
                                     onChange={(e) => setStatus(e.target.value)}
                                 >
                                     <option value="">Select Status</option>
+                                    <option value="ToDo">ToDo</option>
                                     <option value="In Progress">In Progress</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="Cancelled">Cancelled</option>
                                     <option value="Completed">Completed</option>
-                                    <option value="Pending">Pending</option>
                                 </select>
                             </div>
                             <div className="w-full md:w-1/2 px-3">
@@ -135,9 +146,9 @@ const AddTaskPage: React.FC = () => {
                                     onChange={(e) => setPriority(e.target.value)}
                                 >
                                     <option value="">Select Priority</option>
-                                    <option value="High">High</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Low">Low</option>
+                                    <option value="high">high</option>
+                                    <option value="medium">medium</option>
+                                    <option value="low">low</option>
                                 </select>
                             </div>
                         </div>
