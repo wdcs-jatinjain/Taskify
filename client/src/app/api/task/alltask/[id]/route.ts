@@ -1,27 +1,21 @@
 import { API_URL } from "@/config";
 import { RESULT_STATUS } from "@/constants";
-import { getTasksReturnDataType } from "@/types";
+import { editTasksReturnDataType } from "@/types";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 
-
-export async function GET() {
-
-    const cookieStore = cookies()
-
-    const userId: any = cookieStore.get('id')
-    const id = userId.value;
+export async function PUT(req: any, res: Response) {
+    const { id } = req.query
 
 
     try {
-        const getTasksRes = await fetch(`${API_URL}/task/gettask?id=${id}`, {
-            method: 'GET',
+        const editTasksRes = await fetch(`${API_URL}/task/gettask?id=${id}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
 
         });
-        const responseData: getTasksReturnDataType = await getTasksRes.json()
+        const responseData: editTasksReturnDataType = await editTasksRes.json()
 
         if (responseData.status === RESULT_STATUS.SUCCESS) {
 
@@ -32,10 +26,6 @@ export async function GET() {
                 message: "Something went wrong while fetching all tasks."
             })
         }
-
-
-
-
 
 
     } catch (error) {

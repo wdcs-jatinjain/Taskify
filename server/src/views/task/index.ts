@@ -4,6 +4,7 @@ import editTask from "./edittask";
 import getAllTask from "./gettask";
 import getOneTask from "./getone";
 import addCatagories from "./addcatagories";
+import getAllCatagories from "./getallcatagories";
 
 
 const taskViews = ({
@@ -13,6 +14,7 @@ const taskViews = ({
     getAllTaskViews: getAllTask,
     getOneTaskViews: getOneTask,
     addCatagoriesViews: addCatagories,
+    getAllCatagoriesViews: getAllCatagories,
 })
 
 export default taskViews;

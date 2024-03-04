@@ -7,7 +7,7 @@ const registerUserValidation = yup.object().shape({
     contactNo: yup.string()
         .typeError("That doesn't look like a phone number")
         .length(10),
-    catagory: yup.string(),
+    catagories: yup.string(),
     recoverCode: yup.number().min(3),
     assignTask: yup.string(),
     createdTask: yup.string(),

@@ -78,7 +78,9 @@ function Tasks() {
                                         <td className="px-4 py-3">{t.subCatagory}</td>
                                         <td className="px-4 py-3 text-lg">{t.status}</td>
                                         <td className="px-4 py-3 text-lg">{t.priority}</td>
-                                        <td className="px-4 py-1 text-lg"><FiEdit3 /></td>
+                                        <td className="px-4 py-1 text-lg"><Link href={"/task/edit"}> <FiEdit3 />
+                                        </Link>
+                                        </td>
                                     </tr>
                                 ))
                             ) : (

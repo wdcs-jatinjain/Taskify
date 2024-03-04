@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
@@ -13,7 +13,10 @@ import Link from 'next/link';
 
 
 export default function RegistrationForm() {
+
     const [showPassword, setShowPassword] = useState(false);
+    const [catagories, setCatagories] = useState([]);
+
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -21,12 +24,38 @@ export default function RegistrationForm() {
     const router = useRouter();
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(registerUserValidation) })
 
+    const fetchAllCatagories = async () => {
+        try {
+            const res = await fetch(`/api/task/allcatagories`, {
+                // cache: 'no-store',
+            });
+
+            if (!res.ok) {
+                throw new Error('Failed to fetch the tasks');
+            }
+
+            const data = await res.json();
+            setCatagories(data.data);
+        } catch (error) {
+            console.error('Error Loading Topics:', error);
+        }
+    };
+
+    useEffect(() => {
+
+
+        fetchAllCatagories();
+    }, []);
+
+
+
     const onSubmit = async (data: any) => {
 
         try {
             await registerUserValidation.isValidSync({ ...data }, { abortEarly: false });
 
             const response = await fetch('api/register', {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,6 +64,7 @@ export default function RegistrationForm() {
             });
 
             const responseData = await response.json();
+            console.log("🚀 ~ onSubmit ~ responseData:", responseData)
 
             if (responseData.status === RESULT_STATUS.SUCCESS) {
                 router.push('/task');
@@ -47,6 +77,11 @@ export default function RegistrationForm() {
             console.error('Error registering user:', error);
         }
     };
+
+
+
+
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -115,19 +150,34 @@ export default function RegistrationForm() {
                 />
                 <span className="text-red-500">{errors.contactNo?.message}</span>
             </div>
+
+
+
+
             <div className="mb-6">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="catagory">
-                    catagory<span className='text-red-500' >*</span>
-                </label>
-                <input
-                    {...register('catagory')}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="catagory"
-                    type="text"
-                    placeholder="catagory"
-                />
-                <span className="text-red-500">{errors.contactNo?.message}</span>
+                <label htmlFor="catagories" className="block text-sm font-medium text-black">select catagories</label>
+                <select
+                    {...register('catagories')}
+                    id="catagories"
+                    className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
+
+                >
+
+
+                    <option value="">Catagories</option>
+                    {catagories.map((catagories: { _id: string, name: string }) => (
+                        <>
+                            <option key={catagories._id} value={catagories._id}>{catagories.name}</option>
+                        </>
+
+                    ))}
+
+                </select>
             </div>
+
+
+
+
             <div className="flex items-center justify-between">
                 <button
                     className="bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

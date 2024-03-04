@@ -3,10 +3,10 @@ import Views from "../../views";
 
 
 
-export default async function getAllTaskController(req: any, res: Response) {
-const id = req.query
+export default async function getAllCatagoriesController(req: Request, res: Response) {
+
     try {
-        const getAllTaskViews = await Views.taskViews.getAllTaskViews(id)
+        const getAllTaskViews = await Views.taskViews.getAllCatagoriesViews()
 
         res.status(201).json(getAllTaskViews)
     } catch (error: any) {

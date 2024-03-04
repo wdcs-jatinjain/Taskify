@@ -7,13 +7,13 @@ import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
     try {
-        const { name, email, password, contactNo, catagory } = await req.json()
+        const { name, email, password, contactNo, catagories } = await req.json()
         const registerRes = await fetch(`${API_URL}/user/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, email, password, contactNo, catagory })
+            body: JSON.stringify({ name, email, password, contactNo, catagories })
         });
         const data: RegisterDataType = await registerRes.json()
         if (data.status === 'Success') {

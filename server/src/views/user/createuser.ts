@@ -6,7 +6,7 @@ import { JWT_SECRET_KEY } from '../../../config';
 
 
 
-export default async function createUser({ name, email, password, contactNo, catagory }: registerbody) {
+export default async function createUser({ name, email, password, contactNo, catagories }: registerbody) {
 
     try {
         const existingUser = await UserModel.findOne({ email });
@@ -18,7 +18,7 @@ export default async function createUser({ name, email, password, contactNo, cat
 
         }
 
-        const newUser = await UserModel.create({ name, email, password, contactNo, catagory });
+        const newUser = await UserModel.create({ name, email, password, contactNo, catagories });
         const newToken = jwt.sign({ userId: newUser._id }, JWT_SECRET_KEY as string, { expiresIn: '1h' });
 
         return {

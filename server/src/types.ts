@@ -3,7 +3,7 @@ export type registerbody = {
     email: string,
     password: string,
     contactNo: string,
-    catagory: string,
+    catagories: string,
 }
 
 export type loginbody = {

@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { RESULT_STATUS } from "../../../../constants";
 
 
-export async function POST(req: Request) {
+export async function PUT(req: Request) {
 
     const cookieStore = cookies()
     const userId: any = cookieStore.get('id')
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
 
     try {
-        const { title, description,  subCatagory, status, priority } = await req.json()
+        const { title, description, subCatagory, status, priority } = await req.json()
 
         const payload = {
             userId: id,
@@ -26,9 +26,8 @@ export async function POST(req: Request) {
             status,
             priority
         };
-        console.log("🚀 ~ POST ~ payload:", payload)
 
-        const addTaskRes = await fetch(`${API_URL}/task/addtask`, {
+        const addTaskRes = await fetch(`${API_URL}/task/edittask`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,8 +35,6 @@ export async function POST(req: Request) {
             body: JSON.stringify(payload)
         });
         const data: addTaskeReturnDataType = await addTaskRes.json()
-        console.log("🚀 ~ POST ~ data:", data)
-        
         if (data.status === RESULT_STATUS.SUCCESS) {
 
             return NextResponse.json(data)

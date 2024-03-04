@@ -19,10 +19,17 @@ export type LoginDataType = {
 export type addTaskDataType = {
     title: string,
     description: string,
-    catagory: string
     subCatagory: string,
     status: string,
     priority: string,
+}
+
+export type editTaskDataType = {
+    newTitle: string,
+    newDescription: string,
+    newSubCatagory: string,
+    newStatus: string,
+    newPriority: string,
 }
 
 
@@ -30,14 +37,13 @@ export type addTaskeReturnDataType = {
     userId: string,
     title: string,
     description: string,
-    catagory: string
     subCatagory: string,
     status: string,
     priority: string,
 }
 
 export type tasksData = {
-    _id:string,
+    _id: string,
     title: string,
     description: string,
     catagory: string
@@ -47,11 +53,43 @@ export type tasksData = {
 }
 
 export type getTasksReturnDataType = {
-    _id:string,
+    _id: string,
     title: string,
     description: string,
     catagory: string
     subCatagory: string,
     status: string,
     priority: string,
+}
+export type editTasksReturnDataType = {
+    title: string,
+    description: string,
+    subCatagory: string,
+    status: string,
+    priority: string,
+}
+export type getallCatagoriesReturnDataType = {
+    _id: string,
+    name: string,
+    subcategories: [
+        id: string,
+        name: string,
+        _id: string
+    ]
+    status: string,
+
+}
+export type catagoriesDataType = {
+    _id: string,
+    name: string,
+
+    status: string,
+
+}
+export type getSubCatagoriesReturnDataType = {
+    _id: string,
+    name: string,
+
+    status: string,
+
 }
