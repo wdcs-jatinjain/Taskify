@@ -5,37 +5,82 @@ import { RESULT_STATUS } from '@/constants';
 import React, { useEffect, useState } from 'react';
 import { NextResponse } from 'next/server';
 import { useRouter } from 'next/navigation';
-import { addTaskDataType, editTaskDataType } from '@/types';
+import { addTaskDataType } from '@/types';
 
 
 
-const AddTaskPage: React.FC = () => {
+const TaskForm = ({ taskId }: any) => {
+    console.log("🚀 ~ TaskForm ~ taskId:", taskId)
     const router = useRouter();
 
+    //all the states
+
+    const [title, setTitle] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [catagory, setCatagory] = useState([]);
+
+    const [subCatagory, setSubCatagory] = useState<string>('');
+    const [status, setStatus] = useState<string>('');
+    const [priority, setPriority] = useState<string>('');
+
+    const [task, setTask] = useState([]);
 
 
-    const [newTitle, setNewTitle] = useState<string>('');
-    const [newDescription, setnewDescription] = useState<string>('');
-    const [selectedCatagory, setSelectedCatagory] = useState<string>('');
 
-    const [newSubCatagory, setSubCatagory] = useState<string>('');
-    const [newStatus, setNewStatus] = useState<string>('');
-    const [newPriority, setNewPriority] = useState<string>('');
-
-
-
-
-    const editTaskData = {
-        newTitle,
-        newDescription,
-        newSubCatagory,
-        newStatus,
-        newPriority,
+    const addTaskData = {
+        title,
+        description,
+        subCatagory,
+        status,
+        priority,
     };
+    const editTaskData = {
+        title,
+        description,
+        subCatagory,
+        status,
+        priority,
+    };
+
+    // if user edit the tasks so will have the task id 
+    useEffect(() => {
+        const getonetask = async () => {
+            try {
+                const res = await fetch(`/api/task/getonetask/${taskId}`, {
+
+                });
+
+                if (!res.ok) {
+                    throw new Error('Failed to fetch the task');
+                }
+
+                const { data } = await res.json();
+                console.log("🚀 ~ getonetask ~ res:", res)
+                console.log("🚀 ~ getonetask ~ data:", data)
+                setTask(data.data);
+                setTitle(data.title)
+                setDescription(data.description)
+                setSubCatagory(data.subCatagory)
+                setStatus(data.status)
+                setPriority(data.priority)
+
+            } catch (error) {
+                console.error('Error fetching task:', error);
+            }
+        };
+
+
+
+        getonetask();
+    }, [taskId]);
+
+
+
+    // fetching all the subcatagories
 
     const fetchAllSubCatagories = async () => {
         try {
-            const res = await fetch(`/api/task/allrask/${id}`, {
+            const res = await fetch(`/api/task/getsubcatagories`, {
                 // cache: 'no-store',
             });
 
@@ -44,8 +89,7 @@ const AddTaskPage: React.FC = () => {
             }
 
             const data = await res.json();
-            console.log("🚀 ~ fetchAllSubCatagories ~ data:", data)
-            setSubCatagory(data.data.subcategories);
+            setCatagory(data.data.subcategories);
         } catch (error) {
             console.error('Error Loading Catagories:', error);
         }
@@ -58,38 +102,45 @@ const AddTaskPage: React.FC = () => {
     }, []);
 
 
+    const taskData = taskId ? editTaskData : addTaskData
 
-    const handleAddTask = async (editTaskData: editTaskDataType) => {
-
-
+    const handleTask = async (taskData: addTaskDataType) => {
+        console.log("🚀 ~ handleTask ~ taskData:", taskData)
 
 
         try {
-
-            const response = await fetch(`/api/task/create`, {
-                method: 'POST',
+            const url = taskId ? `/api/task/edittask/${taskId}` : `/api/task/create`
+            const method = taskId ? "PUT" : "POST"
+            const res = {
+                method: method,
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(editTaskData)
-            });
+                body: JSON.stringify(taskData)
+            }
+
+            const response = await fetch(url, res);
 
             const responseData = await response.json();
+            console.log("🚀 ~ handleTask ~ responseData:", responseData)
 
             if (responseData.status === RESULT_STATUS.SUCCESS) {
                 router.push('/task');
-                return NextResponse.json(editTaskData);
+                return NextResponse.json(taskData);
             } else {
                 console.log(RESULT_STATUS.FAILURE);
                 return NextResponse.error()
             }
         } catch (error) {
-            console.error('Error adding task:', error);
+            const errormessage = taskId ? 'error while edit task' : "error while adding  task"
+
+            console.error('errormessage', errormessage);
         }
 
 
 
     };
+
 
 
     return (
@@ -99,44 +150,44 @@ const AddTaskPage: React.FC = () => {
                 <div className='mx-auto px-20 py-8'>
 
 
-                    <form onSubmit={(e) => { e.preventDefault(); handleAddTask(editTaskData); }}>
+                    <form onSubmit={(e) => { e.preventDefault(); handleTask(taskData); }}>
                         <div className="mb-4">
-                            <label htmlFor="newTitle" className="block text-sm font-medium text-black">newTitle</label>
+                            <label htmlFor="title" className="block text-sm font-medium text-black">Title</label>
                             <input
                                 type="text"
                                 id="title"
                                 className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
-                                value={newTitle}
-                                onChange={(e) => setNewTitle(e.target.value)}
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
                         <div className="mb-4">
-                            <label htmlFor="newDescription" className="block text-sm font-medium text-black">newDescription</label>
+                            <label htmlFor="description" className="block text-sm font-medium text-black">Description</label>
                             <input
                                 type="text"
-                                id="desc"
+                                id="title"
                                 className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
-                                value={newDescription}
-                                onChange={(e) => setnewDescription(e.target.value)}
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
                             />
                         </div>
 
 
                         <div className="mb-4">
-                            <label htmlFor="newSubCatagory" className="block text-sm font-medium text-black">Catagory</label>
+                            <label htmlFor="subCatagory" className="block text-sm font-medium text-black">Catagory</label>
                             <select
-                                id="newSubCatagory"
+                                id="subCatagory"
                                 className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
-                                value={selectedCatagory}
-                                onChange={(e) => {
+                                value={subCatagory}
+                                onChange={(e: any) => {
                                     console.log("🚀 ~ e:", e.target.value)
 
-                                    setSelectedCatagory(e.target.value)
+                                    setSubCatagory(e.target.value)
                                 }
                                 }
                             >
                                 <option value="">Catagories</option>
-                                {Array.isArray(newSubCatagory) && newSubCatagory.map((category: { _id: string, name: string }) => (
+                                {catagory.map((category: { _id: string, name: string }) => (
                                     <option key={category._id} value={category.name}>{category.name}</option>
                                 ))}
                             </select>
@@ -147,12 +198,12 @@ const AddTaskPage: React.FC = () => {
 
                         <div className="flex flex-wrap -mx-3 mb-4">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label htmlFor="newStatus" className="block text-sm font-medium text-black">Status</label>
+                                <label htmlFor="status" className="block text-sm font-medium text-black">Status</label>
                                 <select
-                                    id="newStatus"
+                                    id="status"
                                     className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
-                                    value={newStatus}
-                                    onChange={(e) => setNewStatus(e.target.value)}
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
                                 >
                                     <option value="">Select Status</option>
                                     <option value="ToDo">ToDo</option>
@@ -163,12 +214,12 @@ const AddTaskPage: React.FC = () => {
                                 </select>
                             </div>
                             <div className="w-full md:w-1/2 px-3">
-                                <label htmlFor="newPriority" className="block text-sm font-medium text-black">priority To</label>
+                                <label htmlFor="assign to" className="block text-sm font-medium text-black">priority To</label>
                                 <select
-                                    id="newPriority"
+                                    id="assign to"
                                     className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
-                                    value={newPriority}
-                                    onChange={(e) => setNewPriority(e.target.value)}
+                                    value={priority}
+                                    onChange={(e) => setPriority(e.target.value)}
                                 >
                                     <option value="">Select Priority</option>
                                     <option value="high">high</option>
@@ -191,4 +242,4 @@ const AddTaskPage: React.FC = () => {
         </MainLayout >
     );
 }
-export default AddTaskPage
+export default TaskForm

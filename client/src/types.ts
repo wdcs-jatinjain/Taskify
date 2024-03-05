@@ -31,6 +31,24 @@ export type editTaskDataType = {
     newStatus: string,
     newPriority: string,
 }
+export type getoneTasksReturnDataType = {
+    newTitle: string,
+    newDescription: string,
+    newSubCatagory: string,
+    newStatus: string,
+    newPriority: string,
+    status: string,
+
+}
+export type deleteReturnDataType = {
+    newTitle: string,
+    newDescription: string,
+    newSubCatagory: string,
+    newStatus: string,
+    newPriority: string,
+    status: string,
+
+}
 
 
 export type addTaskeReturnDataType = {

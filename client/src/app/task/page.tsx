@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import MainLayout from '@/app/layouts/main'
 import Link from 'next/link'
 import { FiEdit3 } from "react-icons/fi";
+import { MdOutlineDelete } from "react-icons/md";
+import { useRouter } from 'next/navigation';
 import { tasksData } from '@/types';
 
 
@@ -21,6 +23,7 @@ interface Tasks {
 function Tasks() {
     const [tasks, setTasks] = useState([])
     console.log("🚀 ~ Tasks ~ tasks:", tasks)
+    const router = useRouter()
     const fetchData = async () => {
         try {
             const res = await fetch(`/api/task/alltask`, {
@@ -44,6 +47,21 @@ function Tasks() {
         fetchData();
     }, []);
 
+    const removeTask = async ({ _id }: any) => {
+        console.log("🚀 ~ removeTask ~ taskId:", taskId)
+        const confirmed = confirm("Are you sure!");
+
+        if (confirmed) {
+            const res = await fetch(`/api/task/deletetask/${taskId}`, {
+                method: 'DELETE',
+            });
+            if (res.ok) {
+                router.refresh();
+            };
+        }
+    }
+
+
 
     return <MainLayout>
         < div className="text-black-200 body-font h-screen">
@@ -62,10 +80,13 @@ function Tasks() {
                         <thead>
                             <tr>
                                 <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tl rounded-bl">title</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">description</th>
                                 <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">catagory</th>
                                 <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">status</th>
                                 <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">priority</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200"></th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">edit</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">del</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tl rounded-bl"></th>
 
                             </tr>
                         </thead>
@@ -78,13 +99,16 @@ function Tasks() {
                                         <td className="px-4 py-3">{t.subCatagory}</td>
                                         <td className="px-4 py-3 text-lg">{t.status}</td>
                                         <td className="px-4 py-3 text-lg">{t.priority}</td>
-                                        <td className="px-4 py-1 text-lg"><Link href={"/task/edit"}> <FiEdit3 />
+                                        <td className="px-4 py-1 text-lg"><Link href={`/task/edit/${t._id}`}> <FiEdit3 size={24} />
                                         </Link>
+                                        </td>
+                                        <td className="px-4 py-1 text-lg"> <MdOutlineDelete size={24} onClick={() => removeTask(t._id)} />
+                                        
                                         </td>
                                     </tr>
                                 ))
-                            ) : (
-                                <tr>
+                                ) : (
+                                    <tr>
                                     <td colSpan={6} className='ml-'>No tasks available</td>
                                 </tr>
                             )}

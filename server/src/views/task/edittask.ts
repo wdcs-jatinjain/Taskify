@@ -5,10 +5,10 @@ import { edittaskbody } from "../../types";
 
 
 
-export default async function editTask({ id, title, description, catagory, status, priority }: edittaskbody) {
+export default async function editTask({ id, title, description, subCatagory, status, priority }: edittaskbody) {
 
     try {
-        const editTask = await TaskModel.findByIdAndUpdate(id, { title, description, catagory, status, priority })
+        const editTask = await TaskModel.findByIdAndUpdate(id, { title, description, subCatagory, status, priority })
         return {
             status: RESULT_STATUS.SUCCESS,
             message: "task edited successfull",

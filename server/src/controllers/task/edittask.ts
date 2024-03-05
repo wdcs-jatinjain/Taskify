@@ -4,13 +4,14 @@ import Views from "../../views";
 import { edittaskvalidation } from "./taskvalidation";
 
 
-export default async function editTaskController({ body: { title, description, catagory, status, priority }, query: { id } }: { body: edittaskbody, query: { id: string } }, res: Response) {
+export default async function editTaskController({ body: { title, description, subCatagory, status, priority }, query: { id } }: { body: edittaskbody, query: { id: string } }, res: Response) {
+console.log("🚀 ~ editTaskController ~ title, description, subCatagory, status, priority:", title, description, subCatagory, status, priority)
 
 
 
     try {
-        await edittaskvalidation.validateAsync({ title, description, catagory, status, priority }, { abortEarly: false });
-        const editTaskViews = await Views.taskViews.editTaskViews({ title, description, catagory, status, priority, id })
+        await edittaskvalidation.validateAsync({ title, description, subCatagory, status, priority }, { abortEarly: false });
+        const editTaskViews = await Views.taskViews.editTaskViews({ title, description, subCatagory, status, priority, id })
 
         res.status(201).json(editTaskViews)
     } catch (error: any) {

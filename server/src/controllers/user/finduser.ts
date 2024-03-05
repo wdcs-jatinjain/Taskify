@@ -1,7 +1,5 @@
 import { Response } from "express";
-import { loginbody } from "../../types";
 import Views from "../../views";
-import { loginUserValidation } from "./userValidations";
 
 export default async function findUserController(req: any, res: Response) {
 

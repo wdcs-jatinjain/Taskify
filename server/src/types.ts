@@ -25,7 +25,7 @@ export type edittaskbody = {
     id: string,
     title: string,
     description: string,
-    catagory: string,
+    subCatagory: string,
     status: string,
     priority: string
 }

@@ -16,7 +16,7 @@ const edittaskvalidation = Joi.object({
 
     title: Joi.string().required(),
     description: Joi.string().required(),
-    catagory: Joi.string().required(),
+    subCatagory: Joi.string().required(),
     status: Joi.string().valid('ToDo', 'In Progress', 'On Hold', 'Cancelled', 'Completed').required(),
     priority: Joi.string().valid('low', 'medium', 'high').required()
 
