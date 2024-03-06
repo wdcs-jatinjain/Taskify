@@ -3,7 +3,7 @@ import { RESULT_STATUS } from "@/constants";
 import { editTasksReturnDataType } from "@/types";
 import { NextResponse } from "next/server";
 
-export async function PUT(req: any, { params }: { params: { taskId: string } }) {
+export async function PUT(req: Request, { params }: { params: { taskId: string } }) {
 
 
 

@@ -10,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { RESULT_STATUS } from '@/constants';
 import { NextResponse } from 'next/server';
 import Link from 'next/link';
+import { RegisterDataType, RegisterSubmitHandlerType } from '@/types';
 
 
 export default function RegistrationForm() {
@@ -49,7 +50,7 @@ export default function RegistrationForm() {
 
 
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: RegisterSubmitHandlerType) => {
 
         try {
             await registerUserValidation.isValidSync({ ...data }, { abortEarly: false });
@@ -64,13 +65,11 @@ export default function RegistrationForm() {
             });
 
             const responseData = await response.json();
-            console.log("🚀 ~ onSubmit ~ responseData:", responseData)
 
             if (responseData.status === RESULT_STATUS.SUCCESS) {
                 router.push('/task');
                 return NextResponse.json(data);
             } else {
-                console.log(RESULT_STATUS.FAILURE);
                 return NextResponse.error()
             }
         } catch (error) {

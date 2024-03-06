@@ -25,7 +25,7 @@ function Tasks() {
     const router = useRouter()
     const fetchData = async () => {
         try {
-            const res = await fetch(`/api/task/alltask`, {
+            const res = await fetch(`/api/task/all-task`, {
                 // cache: 'no-store',
             });
 
@@ -46,12 +46,11 @@ function Tasks() {
         fetchData();
     }, []);
 
-    const removeTask = async ({ taskId }: any) => {
-        console.log("🚀 ~ removeTask ~ taskId:", taskId)
+    const removeTask = async ({ taskId }: { taskId: string }) => {
         const confirmed = confirm("Are you sure!");
 
         if (confirmed) {
-            const res = await fetch(`/api/task/deletetask/${taskId}`, {
+            const res = await fetch(`/api/task/delete-task/${taskId}`, {
                 method: 'DELETE',
             });
             if (res.ok) {
@@ -102,12 +101,12 @@ function Tasks() {
                                         </Link>
                                         </td>
                                         <td className="px-4 py-1 text-lg"> <MdOutlineDelete size={24} onClick={() => removeTask(t._id)} />
-                                        
+
                                         </td>
                                     </tr>
                                 ))
-                                ) : (
-                                    <tr>
+                            ) : (
+                                <tr>
                                     <td colSpan={6} className='ml-'>No tasks available</td>
                                 </tr>
                             )}

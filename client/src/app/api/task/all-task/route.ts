@@ -1,6 +1,6 @@
 import { API_URL } from "@/config";
 import { RESULT_STATUS } from "@/constants";
-import { getSubCatagoriesReturnDataType, getTasksReturnDataType } from "@/types";
+import { getTasksReturnDataType } from "@/types";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
@@ -9,19 +9,20 @@ export async function GET() {
 
     const cookieStore = cookies()
 
-    const userId: any = cookieStore.get('id')
-    const id = userId.value;
+    const userIdCookie = cookieStore.get('id')
+    const id: string | undefined = userIdCookie?.value;
+
 
 
     try {
-        const getSubCatagoriesRes = await fetch(`${API_URL}/user/find?id=${id}`, {
+        const getTasksRes = await fetch(`${API_URL}/task/gettask?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
 
         });
-        const responseData: getSubCatagoriesReturnDataType = await getSubCatagoriesRes.json()
+        const responseData: getTasksReturnDataType = await getTasksRes.json()
 
         if (responseData.status === RESULT_STATUS.SUCCESS) {
 
@@ -29,7 +30,7 @@ export async function GET() {
         } else {
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,
-                message: "Something went wrong while getting the SubCatagories."
+                message: "Something went wrong while fetching all tasks."
             })
         }
 

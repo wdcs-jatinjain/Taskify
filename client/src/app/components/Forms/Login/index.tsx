@@ -8,6 +8,7 @@ import { RESULT_STATUS } from '@/constants';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { NextResponse } from 'next/server';
+import { LoginDataType, LoginSubmitHandlerType } from '@/types';
 
 const LoginFormComponent = () => {
     const router = useRouter()
@@ -18,7 +19,7 @@ const LoginFormComponent = () => {
         setShowPassword(!showPassword);
     };
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(loginUserValidation) })
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: LoginSubmitHandlerType) => {
         try {
             await loginUserValidation.isValidSync({ ...data }, { abortEarly: false });
 

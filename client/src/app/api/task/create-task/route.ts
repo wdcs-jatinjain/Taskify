@@ -9,8 +9,8 @@ import { RESULT_STATUS } from "../../../../constants";
 export async function POST(req: Request) {
 
     const cookieStore = cookies()
-    const userId: any = cookieStore.get('id')
-    const id = userId.value;
+    const userIdCookie = cookieStore.get('id')
+    const id: string | undefined = userIdCookie?.value;
 
 
 
@@ -26,7 +26,6 @@ export async function POST(req: Request) {
             status,
             priority
         };
-        console.log("🚀 ~ POST ~ payload:", payload)
 
         const addTaskRes = await fetch(`${API_URL}/task/addtask`, {
             method: 'POST',
@@ -36,7 +35,6 @@ export async function POST(req: Request) {
             body: JSON.stringify(payload)
         });
         const data: addTaskeReturnDataType = await addTaskRes.json()
-        console.log("🚀 ~ POST ~ data:", data)
         
         if (data.status === RESULT_STATUS.SUCCESS) {
 

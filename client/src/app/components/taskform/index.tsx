@@ -9,7 +9,7 @@ import { addTaskDataType } from '@/types';
 
 
 
-const TaskForm = ({ taskId }: any) => {
+const TaskForm = ({ taskId }: { taskId: string }) => {
     const router = useRouter();
 
     //all the states
@@ -45,7 +45,7 @@ const TaskForm = ({ taskId }: any) => {
     useEffect(() => {
         const getonetask = async () => {
             try {
-                const res = await fetch(`/api/task/getonetask/${taskId}`, {
+                const res = await fetch(`/api/task/get-one-task/${taskId}`, {
 
                 });
 
@@ -77,8 +77,7 @@ const TaskForm = ({ taskId }: any) => {
 
     const fetchAllSubCatagories = async () => {
         try {
-            const res = await fetch(`/api/task/getsubcatagories`, {
-                // cache: 'no-store',
+            const res = await fetch(`/api/task/get-sub-catagories`, {
             });
 
             if (!res.ok) {
@@ -105,7 +104,7 @@ const TaskForm = ({ taskId }: any) => {
 
 
         try {
-            const url = taskId ? `/api/task/edittask/${taskId}` : `/api/task/create`
+            const url = taskId ? `/api/task/edit-task/${taskId}` : `/api/task/create-task`
             const method = taskId ? "PUT" : "POST"
             const res = {
                 method: method,
@@ -123,7 +122,6 @@ const TaskForm = ({ taskId }: any) => {
                 router.push('/task');
                 return NextResponse.json(taskData);
             } else {
-                console.log(RESULT_STATUS.FAILURE);
                 return NextResponse.error()
             }
         } catch (error) {
@@ -175,7 +173,7 @@ const TaskForm = ({ taskId }: any) => {
                                 className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
                                 value={subCatagory}
                                 onChange={(e: any) => {
-                                    console.log("🚀 ~ e:", e.target.value)
+
 
                                     setSubCatagory(e.target.value)
                                 }

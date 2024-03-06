@@ -5,7 +5,6 @@ import { edittaskvalidation } from "./taskvalidation";
 
 
 export default async function editTaskController({ body: { title, description, subCatagory, status, priority }, query: { id } }: { body: edittaskbody, query: { id: string } }, res: Response) {
-console.log("🚀 ~ editTaskController ~ title, description, subCatagory, status, priority:", title, description, subCatagory, status, priority)
 
 
 

@@ -15,6 +15,22 @@ export type LoginDataType = {
     token?: string,
 
 }
+export type LoginSubmitHandlerType = {
+    email: string;
+    password: string;
+}
+export type RegisterSubmitHandlerType = {
+    contactNo?: string | undefined;
+    catagories?: string | undefined;
+    recoverCode?: number | undefined;
+    assignTask?: string | undefined;
+    createdTask?: string | undefined;
+    name: string;
+    email: string;
+    password: string;
+}
+
+
 
 export type addTaskDataType = {
     title: string,
