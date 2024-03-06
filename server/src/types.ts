@@ -33,6 +33,18 @@ export type edittaskbody = {
 export type deletetaskbody = {
     id: string
 }
+export type gettaskcontrollerreq = {
+    query: {
+        id: string;
+       
+    };
+}
+export type finduserRes = {
+    query: {
+        id: string;
+       
+    };
+}
 export type getonetaskbody = {
     id: string
 }

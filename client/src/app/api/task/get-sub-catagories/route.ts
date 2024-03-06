@@ -20,11 +20,11 @@ export async function GET() {
             },
 
         });
-        const responseData: getSubCatagoriesReturnDataType = await getSubCatagoriesRes.json()
+        const getSubCatagoriesData: getSubCatagoriesReturnDataType = await getSubCatagoriesRes.json()
 
-        if (responseData.status === RESULT_STATUS.SUCCESS) {
+        if (getSubCatagoriesData.status === RESULT_STATUS.SUCCESS) {
 
-            return NextResponse.json(responseData)
+            return NextResponse.json(getSubCatagoriesData)
         } else {
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,

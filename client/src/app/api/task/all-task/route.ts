@@ -22,11 +22,11 @@ export async function GET() {
             },
 
         });
-        const responseData: getTasksReturnDataType = await getTasksRes.json()
+        const getTaskData: getTasksReturnDataType = await getTasksRes.json()
 
-        if (responseData.status === RESULT_STATUS.SUCCESS) {
+        if (getTaskData.status === RESULT_STATUS.SUCCESS) {
 
-            return NextResponse.json(responseData)
+            return NextResponse.json(getTaskData)
         } else {
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,

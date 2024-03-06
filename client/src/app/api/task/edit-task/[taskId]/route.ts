@@ -27,11 +27,11 @@ export async function PUT(req: Request, { params }: { params: { taskId: string }
 
 
         });
-        const responseData: editTasksReturnDataType = await editTasksRes.json()
+        const editTaskData: editTasksReturnDataType = await editTasksRes.json()
 
-        if (responseData.status === RESULT_STATUS.SUCCESS) {
+        if (editTaskData.status === RESULT_STATUS.SUCCESS) {
 
-            return NextResponse.json(responseData)
+            return NextResponse.json(editTaskData)
         } else {
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,

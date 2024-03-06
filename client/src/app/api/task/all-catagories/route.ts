@@ -10,17 +10,17 @@ export async function GET() {
 
     try {
         const getAllCatagoriesRes = await fetch(`${API_URL}/task/getallcatagories`, {
-            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache', 
             },
 
         });
-        const responseData: getallCatagoriesReturnDataType = await getAllCatagoriesRes.json()
+        const getAllCatagoriesData: getallCatagoriesReturnDataType = await getAllCatagoriesRes.json()
 
-        if (responseData.status === RESULT_STATUS.SUCCESS) {
+        if (getAllCatagoriesData.status === RESULT_STATUS.SUCCESS) {
 
-            return NextResponse.json(responseData)
+            return NextResponse.json(getAllCatagoriesData)
         } else {
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,

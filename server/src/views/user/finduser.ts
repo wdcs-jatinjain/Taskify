@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 
 
 
-export default async function getUser(id: any) {
+export default async function getUser(id:string) {
 
 
 

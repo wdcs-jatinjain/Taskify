@@ -172,7 +172,7 @@ const TaskForm = ({ taskId }: { taskId: string }) => {
                                 id="subCatagory"
                                 className="mt-1 p-2 border text-black border-gray-300 rounded-md w-full"
                                 value={subCatagory}
-                                onChange={(e: any) => {
+                                onChange={(e) => {
 
 
                                     setSubCatagory(e.target.value)

@@ -1,8 +1,8 @@
-'use server';
 import { NextResponse } from "next/server";
-import { API_URL } from "../../../config"
-import { RegisterDataType } from "../../../types";
+import { API_URL } from "@/config"
+import { RegisterDataType } from "@/types";
 import { cookies } from "next/headers";
+import { RESULT_STATUS } from "@/constants";
 
 
 export async function POST(req: Request) {
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
             return NextResponse.json(data)
         } else {
             return NextResponse.json({
-                status: "Failure",
+                status: RESULT_STATUS.FAILURE,
                 message: "Something went wrong while creating user."
             })
         }

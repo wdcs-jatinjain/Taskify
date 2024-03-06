@@ -22,7 +22,7 @@ export async function POST(req: Request) {
             return NextResponse.json(LoginData)
         } else {
             return NextResponse.json({
-                status: "Failure",
+                status: RESULT_STATUS.FAILURE,
                 message: "Something went wrong while creating user"
             })
         }

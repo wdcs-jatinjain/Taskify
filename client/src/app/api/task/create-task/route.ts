@@ -1,9 +1,8 @@
-'use server';
 import { NextResponse } from "next/server";
-import { API_URL } from "../../../../config"
-import { addTaskeReturnDataType } from "../../../../types";
+import { API_URL } from "@/config"
+import { addTaskeReturnDataType } from "@/types";
 import { cookies } from "next/headers";
-import { RESULT_STATUS } from "../../../../constants";
+import { RESULT_STATUS } from "@/constants";
 
 
 export async function POST(req: Request) {

@@ -15,11 +15,11 @@ export async function DELETE(req: Request, { params }: { params: { taskId: strin
             },
 
         });
-        const responseData: deleteReturnDataType = await deleteTaskRes.json()
+        const deleteData: deleteReturnDataType = await deleteTaskRes.json()
 
-        if (responseData.status === RESULT_STATUS.SUCCESS) {
+        if (deleteData.status === RESULT_STATUS.SUCCESS) {
 
-            return NextResponse.json(responseData)
+            return NextResponse.json(deleteData)
         } else {
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,

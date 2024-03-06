@@ -8,7 +8,7 @@ import { RESULT_STATUS } from '@/constants';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { NextResponse } from 'next/server';
-import { LoginDataType, LoginSubmitHandlerType } from '@/types';
+import { LoginSubmitHandlerType } from '@/types';
 
 const LoginFormComponent = () => {
     const router = useRouter()
@@ -23,7 +23,7 @@ const LoginFormComponent = () => {
         try {
             await loginUserValidation.isValidSync({ ...data }, { abortEarly: false });
 
-            const response = await fetch('api/login', {
+            const loginRes = await fetch('api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -31,18 +31,18 @@ const LoginFormComponent = () => {
                 body: JSON.stringify(data)
             });
 
-            const responseData = await response.json();
+            const loginData = await loginRes.json();
 
 
-            if (responseData.status === RESULT_STATUS.SUCCESS) {
+            if (loginData.status === RESULT_STATUS.SUCCESS) {
 
 
                 router.push('/task')
 
                 return NextResponse.json(data);
             }
-            if (responseData.status === RESULT_STATUS.FAILURE) {
-                setErrorMessage(responseData.message);
+            if (loginData.status === RESULT_STATUS.FAILURE) {
+                setErrorMessage(loginData.message);
             }
 
         } catch (error) {

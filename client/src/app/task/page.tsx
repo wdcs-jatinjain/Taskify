@@ -26,7 +26,7 @@ function Tasks() {
     const fetchData = async () => {
         try {
             const res = await fetch(`/api/task/all-task`, {
-                // cache: 'no-store',
+                cache: 'no-store',
             });
 
             if (!res.ok) {

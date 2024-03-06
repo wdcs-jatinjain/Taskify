@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { RESULT_STATUS } from '@/constants';
 import { NextResponse } from 'next/server';
 import Link from 'next/link';
-import { RegisterDataType, RegisterSubmitHandlerType } from '@/types';
+import { RegisterSubmitHandlerType } from '@/types';
 
 
 export default function RegistrationForm() {
@@ -27,8 +27,8 @@ export default function RegistrationForm() {
 
     const fetchAllCatagories = async () => {
         try {
-            const res = await fetch(`/api/task/allcatagories`, {
-                // cache: 'no-store',
+            const res = await fetch(`/api/task/all-catagories`, {
+                cache: 'no-store',
             });
 
             if (!res.ok) {
@@ -55,7 +55,7 @@ export default function RegistrationForm() {
         try {
             await registerUserValidation.isValidSync({ ...data }, { abortEarly: false });
 
-            const response = await fetch('api/register', {
+            const registerRes = await fetch('api/register', {
 
                 method: 'POST',
                 headers: {
@@ -64,9 +64,9 @@ export default function RegistrationForm() {
                 body: JSON.stringify(data)
             });
 
-            const responseData = await response.json();
+            const registerData = await registerRes.json();
 
-            if (responseData.status === RESULT_STATUS.SUCCESS) {
+            if (registerData.status === RESULT_STATUS.SUCCESS) {
                 router.push('/task');
                 return NextResponse.json(data);
             } else {

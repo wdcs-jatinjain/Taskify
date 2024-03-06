@@ -15,11 +15,11 @@ export async function GET(req: Request,  { params }: { params: { taskId: string 
             },
 
         });
-        const responseData: getoneTasksReturnDataType = await getoneTasksRes.json()
+        const getOneTaskData: getoneTasksReturnDataType = await getoneTasksRes.json()
 
-        if (responseData.status === RESULT_STATUS.SUCCESS) {
+        if (getOneTaskData.status === RESULT_STATUS.SUCCESS) {
 
-            return NextResponse.json(responseData)
+            return NextResponse.json(getOneTaskData)
         } else {
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,
