@@ -3,9 +3,7 @@ import { RESULT_STATUS } from "../../constants";
 import Category from "../../models/taskcatagory";
 
 export default async function addCatagories({ name, subcategories }: addcatagorybody) {
-    console.log("🚀 ~ addCatagories ~ subcategories:", subcategories)
-    console.log("🚀 ~ addCatagories ~ name:", name)
-
+ 
 
     try {
 

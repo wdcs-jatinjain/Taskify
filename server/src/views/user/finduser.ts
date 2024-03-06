@@ -14,7 +14,7 @@ export default async function getUser(id: any) {
 
     try {
         const getUser = await UserModel.findById({ _id: userId, isDeleted: false })
-        console.log("🚀 ~ getUser ~ getUser:", getUser)
+     
         if (getUser && getUser.catagories) {
             const getCatagories = await Category.findById({ _id: getUser.catagories, isDeleted: false })
 

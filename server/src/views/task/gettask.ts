@@ -6,11 +6,11 @@ import TaskModel from "../../models/tasks";
 
 
 export default async function getAllTask(id: any) {
-    // console.log("🚀 ~ getAllTask ~ id:", id)
+
     const userId = new mongoose.Types.ObjectId(id.id)
     try {
         const getAllTask = await TaskModel.find({ userId, isDeleted: false })
-        // console.log("🚀 ~ getAllTask ~ getAllTask:", getAllTask)
+    
         return {
             status: RESULT_STATUS.SUCCESS,
             data: getAllTask

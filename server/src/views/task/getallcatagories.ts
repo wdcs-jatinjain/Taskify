@@ -6,8 +6,7 @@ import Category from "../../models/taskcatagory";
 
 
 export default async function getAllCatagories() {
-    console.log("🚀 ~ getAllCatagories ~ getAllCatagories:", getAllCatagories)
-
+   
 
     try {
         const getAllCatagories = await Category.find()

@@ -10,7 +10,6 @@ import { addTaskDataType } from '@/types';
 
 
 const TaskForm = ({ taskId }: any) => {
-    console.log("🚀 ~ TaskForm ~ taskId:", taskId)
     const router = useRouter();
 
     //all the states
@@ -55,8 +54,6 @@ const TaskForm = ({ taskId }: any) => {
                 }
 
                 const { data } = await res.json();
-                console.log("🚀 ~ getonetask ~ res:", res)
-                console.log("🚀 ~ getonetask ~ data:", data)
                 setTask(data.data);
                 setTitle(data.title)
                 setDescription(data.description)
@@ -105,7 +102,6 @@ const TaskForm = ({ taskId }: any) => {
     const taskData = taskId ? editTaskData : addTaskData
 
     const handleTask = async (taskData: addTaskDataType) => {
-        console.log("🚀 ~ handleTask ~ taskData:", taskData)
 
 
         try {
@@ -122,7 +118,6 @@ const TaskForm = ({ taskId }: any) => {
             const response = await fetch(url, res);
 
             const responseData = await response.json();
-            console.log("🚀 ~ handleTask ~ responseData:", responseData)
 
             if (responseData.status === RESULT_STATUS.SUCCESS) {
                 router.push('/task');

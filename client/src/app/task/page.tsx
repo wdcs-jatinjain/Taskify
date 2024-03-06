@@ -22,7 +22,6 @@ interface Tasks {
 
 function Tasks() {
     const [tasks, setTasks] = useState([])
-    console.log("🚀 ~ Tasks ~ tasks:", tasks)
     const router = useRouter()
     const fetchData = async () => {
         try {
@@ -47,7 +46,7 @@ function Tasks() {
         fetchData();
     }, []);
 
-    const removeTask = async ({ _id }: any) => {
+    const removeTask = async ({ taskId }: any) => {
         console.log("🚀 ~ removeTask ~ taskId:", taskId)
         const confirmed = confirm("Are you sure!");
 

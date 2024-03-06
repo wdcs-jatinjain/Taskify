@@ -9,8 +9,6 @@ export default async function addCatagoryController({ body: { name, subcategorie
     try {
 
         const addCatagoriesViews = await Views.taskViews.addCatagoriesViews({ name, subcategories })
-        console.log("🚀 ~ addCatagoryController ~ subcategories:", subcategories)
-        console.log("🚀 ~ addCatagoryController ~  name:", name)
 
         res.status(201).json(addCatagoriesViews)
 
