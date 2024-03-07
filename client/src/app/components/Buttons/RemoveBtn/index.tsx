@@ -4,18 +4,23 @@ import { FaTrash } from "react-icons/fa";
 
 // Define the component props
 interface RemoveBtnProps {
-    id: string;
+    taskId: string;
 }
 
-const RemoveBtn: React.FC<RemoveBtnProps> = ({ id }) => {
+const RemoveBtn: React.FC<RemoveBtnProps> = ({ taskId }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const removeTask = async () => {
-        const res = await fetch(`/api/task/delete-task?id=${id}`, {
-            method: 'DELETE',
+        const res = await fetch(`/api/task/delete-task/${taskId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
         });
         if (res.ok) {
-            window.location.reload();
+            
+
+            
         }
         setIsOpen(false);
     };

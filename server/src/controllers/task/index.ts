@@ -11,7 +11,7 @@ const TaskController = express.Router()
 
 TaskController.post('/addtask', addTaskController)
 TaskController.put('/edittask', editTaskController)
-TaskController.delete('/deletetask', deleteTaskController)
+TaskController.put('/deletetask', deleteTaskController)
 TaskController.get('/getone', getonetaskController)
 TaskController.get('/gettask', getAllTaskController)
 TaskController.post('/addcatagories', addCatagoryController)

@@ -11,6 +11,10 @@ import { addTaskDataType } from '@/types';
 
 const TaskForm = ({ taskId }: { taskId: string }) => {
     const router = useRouter();
+    const isEditing = taskId !== undefined;
+    const titleText = isEditing ? 'Edit Task' : 'Add Task';
+    const submitButtonText = isEditing ? 'Update Task' : 'Add Task';
+
 
     //all the states
 
@@ -43,33 +47,27 @@ const TaskForm = ({ taskId }: { taskId: string }) => {
 
     // if user edit the tasks so will have the task id 
     useEffect(() => {
-        const getonetask = async () => {
-            try {
-                const res = await fetch(`/api/task/get-one-task/${taskId}`, {
-
-                });
-
-                if (!res.ok) {
-                    throw new Error('Failed to fetch the task');
+        if (isEditing) {
+            const getonetask = async () => {
+                try {
+                    const res = await fetch(`/api/task/get-one-task/${taskId}`, {});
+                    if (!res.ok) {
+                        throw new Error('Failed to fetch the task');
+                    }
+                    const { data } = await res.json();
+                    setTitle(data.title);
+                    setDescription(data.description);
+                    setSubCatagory(data.subCatagory);
+                    setStatus(data.status);
+                    setPriority(data.priority);
+                } catch (error) {
+                    console.error('Error fetching task:', error);
                 }
+            };
+            getonetask();
+        }
 
-                const { data } = await res.json();
-                setTask(data.data);
-                setTitle(data.title)
-                setDescription(data.description)
-                setSubCatagory(data.subCatagory)
-                setStatus(data.status)
-                setPriority(data.priority)
-
-            } catch (error) {
-                console.error('Error fetching task:', error);
-            }
-        };
-
-
-
-        getonetask();
-    }, [taskId]);
+    }, [taskId, isEditing]);
 
 
 
@@ -92,8 +90,6 @@ const TaskForm = ({ taskId }: { taskId: string }) => {
     };
 
     useEffect(() => {
-
-
         fetchAllSubCatagories();
     }, []);
 
@@ -135,11 +131,12 @@ const TaskForm = ({ taskId }: { taskId: string }) => {
     };
 
 
+    console.log("🚀 ~ TaskForm ~ catagory:", catagory)
 
     return (
         <MainLayout  >
-            <div className="container mx-auto px-8 py-8 h-screen">
-                <h2 className="text-2xl font-medium mb-4">Add Task</h2>
+            <div className="container mx-auto px-8 py-8 h-screen bg-gray-50">
+                <h2 className="text-2xl font-medium mb-4  ">{titleText}</h2>
                 <div className='mx-auto px-20 py-8'>
 
 
@@ -226,7 +223,7 @@ const TaskForm = ({ taskId }: { taskId: string }) => {
                                 type="submit"
                                 className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
                             >
-                                Add Task
+                                {submitButtonText}
                             </button>
                         </div>
                     </form>

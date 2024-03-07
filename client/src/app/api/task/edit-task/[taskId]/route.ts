@@ -19,10 +19,10 @@ export async function PUT(req: Request, { params }: { params: { taskId: string }
         };
         const editTasksRes = await fetch(`${API_URL}/task/edittask?id=${params.taskId}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
+                headers: {
+                    'Content-Type': 'application/json',
 
-            },
+                },
             body: JSON.stringify(payload)
 
 

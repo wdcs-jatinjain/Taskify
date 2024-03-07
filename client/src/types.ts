@@ -22,7 +22,7 @@ export type LoginSubmitHandlerType = {
 export type DeletetHandlerType = {
     query: {
         taskId: string;
-     };
+    };
 }
 
 

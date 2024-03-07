@@ -3,22 +3,22 @@ import { RESULT_STATUS } from "@/constants";
 import { DeletetHandlerType, deleteReturnDataType } from "@/types";
 import { NextResponse } from "next/server";
 
-export async function DELETE( req: DeletetHandlerType, res: Response) {
-    const {  query: { taskId } } = req;
+export async function PUT(req: Request, { params }: { params: { taskId: string } }) {
 
 
 
     try {
-        const deleteTaskRes = await fetch(`${API_URL}/task/deletetask?id=${taskId}`, {
+        const deleteTaskRes = await fetch(`${API_URL}/task/deletetask?id=${params.taskId}`, {
 
-            method: 'DELETE',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+
             },
 
         });
         const deleteData: deleteReturnDataType = await deleteTaskRes.json()
-     
+
         if (deleteData.status === RESULT_STATUS.SUCCESS) {
 
             return NextResponse.json(deleteData)
