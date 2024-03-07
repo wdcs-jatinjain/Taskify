@@ -36,17 +36,33 @@ export type deletetaskbody = {
 export type gettaskcontrollerreq = {
     query: {
         id: string;
-       
+
     };
 }
 export type finduserRes = {
     query: {
         id: string;
-       
+
     };
 }
 export type getonetaskbody = {
     id: string
+}
+export type ordertaskbody = {
+    ids: string,
+    query: {
+        id: string;
+
+    },
+    index: string
+}
+export type ordertaskbodyRes = {
+    ids: string,
+    query: {
+        id: string;
+
+    },
+    index: string
 }
 export type addcatagorybody = {
     name: string,

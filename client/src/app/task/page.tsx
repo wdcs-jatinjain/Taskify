@@ -63,16 +63,16 @@ function Tasks() {
                     </div>
                 </div>
                 <div className="lg:w-2/3 w-full mx-auto overflow-auto rounded-lg shadow-lg">
-                    <table className="table-auto w-full text-left whitespace-no-wrap">
+                    <table className="table-auto w-full text-left whitespace-no-wrap rounded-lg overflow-hidden">
                         <thead>
                             <tr>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tl rounded-bl">Title</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tl">Title</th>
                                 <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Description</th>
                                 <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Category</th>
                                 <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Status</th>
                                 <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Priority</th>
                                 <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Edit</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Delete</th>
+                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tr">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,11 +82,13 @@ function Tasks() {
                                         <td className="px-4 py-3">{t.title}</td>
                                         <td className="px-4 py-3">{t.description}</td>
                                         <td className="px-4 py-3">{t.subCatagory}</td>
-                                        <td className="px-4 py-3 text-lg">{t.status}</td>
-                                        <td className="px-4 py-3 text-lg">{t.priority}</td>
+                                        <td className="px-4 py-3 text-lg font-semibold">{t.status}</td>
+                                        <td className="px-4 py-3 text-lg font-semibold">{t.priority}</td>
                                         <td className="px-4 py-1 text-lg">
                                             <Link href={`/task/edit/${t._id}`}>
+
                                                 <FiEdit3 size={24} className="text-indigo-600 hover:text-indigo-800" />
+
                                             </Link>
                                         </td>
                                         <td className="px-4 py-1 text-lg">
