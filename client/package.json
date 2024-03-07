@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
     "dotenv": "^16.4.2",
     "jsonwebtoken": "^9.0.2",

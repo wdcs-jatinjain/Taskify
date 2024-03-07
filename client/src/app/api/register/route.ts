@@ -15,12 +15,12 @@ export async function POST(req: Request) {
             },
             body: JSON.stringify({ name, email, password, contactNo, catagories })
         });
-        const data: RegisterDataType = await registerRes.json()
-        if (data.status === 'Success') {
-            cookies().set('token', data?.token as string)
-            cookies().set('id', data?.userId as string)
+        const registerData: RegisterDataType = await registerRes.json()
+        if (registerData.status === 'Success') {
+            cookies().set('token', registerData?.token as string)
+            cookies().set('id', registerData?.userId as string)
 
-            return NextResponse.json(data)
+            return NextResponse.json(registerData)
         } else {
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,

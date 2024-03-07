@@ -6,6 +6,7 @@ import { FiEdit3 } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
 import { useRouter } from 'next/navigation';
 import { tasksData } from '@/types';
+import RemoveBtn from '../components/Buttons/RemoveBtn';
 
 
 interface Tasks {
@@ -33,8 +34,8 @@ function Tasks() {
                 throw new Error('Failed to fetch the tasks');
             }
 
-            const data = await res.json();
-            setTasks(data.data);
+            const taskData = await res.json();
+            setTasks(taskData.data);
         } catch (error) {
             console.error('Error Loading Topics:', error);
         }
@@ -46,18 +47,7 @@ function Tasks() {
         fetchData();
     }, []);
 
-    const removeTask = async ({ taskId }: { taskId: string }) => {
-        const confirmed = confirm("Are you sure!");
 
-        if (confirmed) {
-            const res = await fetch(`/api/task/delete-task/${taskId}`, {
-                method: 'DELETE',
-            });
-            if (res.ok) {
-                router.refresh();
-            };
-        }
-    }
 
 
 
@@ -100,7 +90,7 @@ function Tasks() {
                                         <td className="px-4 py-1 text-lg"><Link href={`/task/edit/${t._id}`}> <FiEdit3 size={24} />
                                         </Link>
                                         </td>
-                                        <td className="px-4 py-1 text-lg"> <MdOutlineDelete size={24} onClick={() => removeTask(t._id)} />
+                                        <td className="px-4 py-1 text-lg"> <RemoveBtn id={t._id} />
 
                                         </td>
                                     </tr>

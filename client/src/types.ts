@@ -19,6 +19,14 @@ export type LoginSubmitHandlerType = {
     email: string;
     password: string;
 }
+export type DeletetHandlerType = {
+    query: {
+        taskId: string;
+     };
+}
+
+
+
 export type RegisterSubmitHandlerType = {
     contactNo?: string | undefined;
     catagories?: string | undefined;

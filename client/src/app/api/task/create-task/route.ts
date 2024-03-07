@@ -15,29 +15,28 @@ export async function POST(req: Request) {
 
 
     try {
-        const { title, description,  subCatagory, status, priority } = await req.json()
+        const { title, description, subCatagory, status, priority } = await req.json()
 
-        const payload = {
-            userId: id,
-            title,
-            description,
-            subCatagory,
-            status,
-            priority
-        };
 
         const addTaskRes = await fetch(`${API_URL}/task/addtask`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({
+                userId: id,
+                title,
+                description,
+                subCatagory,
+                status,
+                priority
+            })
         });
-        const data: addTaskeReturnDataType = await addTaskRes.json()
-        
-        if (data.status === RESULT_STATUS.SUCCESS) {
+        const addTaskResponse: addTaskeReturnDataType = await addTaskRes.json()
 
-            return NextResponse.json(data)
+        if (addTaskResponse.status === RESULT_STATUS.SUCCESS) {
+
+            return NextResponse.json(addTaskResponse)
         } else {
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,

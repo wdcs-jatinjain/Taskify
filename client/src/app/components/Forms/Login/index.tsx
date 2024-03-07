@@ -19,16 +19,16 @@ const LoginFormComponent = () => {
         setShowPassword(!showPassword);
     };
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(loginUserValidation) })
-    const onSubmit = async (data: LoginSubmitHandlerType) => {
+    const onSubmit = async (formData: LoginSubmitHandlerType) => {
         try {
-            await loginUserValidation.isValidSync({ ...data }, { abortEarly: false });
+            await loginUserValidation.isValidSync({ ...formData }, { abortEarly: false });
 
             const loginRes = await fetch('api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(formData)
             });
 
             const loginData = await loginRes.json();
@@ -39,7 +39,7 @@ const LoginFormComponent = () => {
 
                 router.push('/task')
 
-                return NextResponse.json(data);
+                return NextResponse.json(formData);
             }
             if (loginData.status === RESULT_STATUS.FAILURE) {
                 setErrorMessage(loginData.message);

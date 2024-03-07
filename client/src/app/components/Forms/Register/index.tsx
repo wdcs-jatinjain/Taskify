@@ -35,8 +35,8 @@ export default function RegistrationForm() {
                 throw new Error('Failed to fetch the tasks');
             }
 
-            const data = await res.json();
-            setCatagories(data.data);
+            const catagoriesDataRes = await res.json();
+            setCatagories(catagoriesDataRes.data);
         } catch (error) {
             console.error('Error Loading Topics:', error);
         }
@@ -50,10 +50,10 @@ export default function RegistrationForm() {
 
 
 
-    const onSubmit = async (data: RegisterSubmitHandlerType) => {
+    const onSubmit = async (formData: RegisterSubmitHandlerType) => {
 
         try {
-            await registerUserValidation.isValidSync({ ...data }, { abortEarly: false });
+            await registerUserValidation.isValidSync({ ...formData }, { abortEarly: false });
 
             const registerRes = await fetch('api/register', {
 
@@ -61,14 +61,14 @@ export default function RegistrationForm() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(formData)
             });
 
             const registerData = await registerRes.json();
 
             if (registerData.status === RESULT_STATUS.SUCCESS) {
                 router.push('/task');
-                return NextResponse.json(data);
+                return NextResponse.json(formData);
             } else {
                 return NextResponse.error()
             }
