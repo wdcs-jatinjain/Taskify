@@ -23,6 +23,25 @@ interface Tasks {
 
 function Tasks() {
     const [tasks, setTasks] = useState([])
+
+    const handleDragStart = (e: React.DragEvent<HTMLDivElement>, id: string) => {
+        e.dataTransfer.setData('text/plain', id);
+       };
+       
+       const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+       };
+       
+       const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        const draggedItemId = e.dataTransfer.getData('');
+        
+        
+
+        
+       };
+
+
     const fetchData = async () => {
         try {
             const res = await fetch(`/api/task/all-task`, {
@@ -77,8 +96,10 @@ function Tasks() {
                         </thead>
                         <tbody>
                             {tasks && tasks.length > 0 ? (
+
                                 tasks.map((t: tasksData) => (
-                                    <tr key={t._id} className="hover:bg-gray-100">
+
+                                    <tr key={t._id} className="hover:bg-gray-100" draggable onDragStart={(e) => handleDragStart(e, t._id)}>
                                         <td className="px-4 py-3">{t.title}</td>
                                         <td className="px-4 py-3">{t.description}</td>
                                         <td className="px-4 py-3">{t.subCatagory}</td>
