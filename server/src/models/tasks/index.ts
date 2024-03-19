@@ -11,6 +11,7 @@ const taskSchema = new Schema(
         status: {
             type: String, enum: ['ToDo', 'In Progress', 'On Hold', 'Cancelled', 'Completed'], default: 'ToDo'
         },
+        order: { type: Number, default: 0 },
         priority: { type: String, enum: ['high', 'medium', 'low'], default: 'medium' },
         estimateTime: String,
         inprogressTime: String,

@@ -5,18 +5,11 @@
 
 
 
-// export default async function orderTaskViews({ id,index ,ids}: ordertaskbody) {
+// export default async function orderTaskViews({}: ordertaskbody) {
 
-    
-//         const updateOne = await TaskModel.bulkWrite(bulkOps)
-
-
-//         return {
-//             status: RESULT_STATUS.SUCCESS,
-//             message: "order updated Succesfully",
-//             data: updateOne
-//         }
-//     } catch (error) {
-//         console.error("🚀 ~ updateOne ~ error:", error)
-//     }
+//     const getNextOrderNumber = async () => {
+//         const highestOrderTask = await Task.findOne({}, {}, { sort: { order: -1 } }).exec();
+//         return highestOrderTask ? highestOrderTask.order + 1 : 1; // Default to 1 if no tasks exist
+//     };
+       
 // }
