@@ -6,6 +6,7 @@ import getAllTaskController from './gettask';
 import getonetaskController from './getone';
 import addCatagoryController from './taskcatagory';
 import getAllCatagoriesController from './getallcatagories';
+import orderTaskController from './ordertask';
 
 const TaskController = express.Router()
 
@@ -16,6 +17,7 @@ TaskController.get('/getone', getonetaskController)
 TaskController.get('/gettask', getAllTaskController)
 TaskController.post('/addcatagories', addCatagoryController)
 TaskController.get('/getallcatagories', getAllCatagoriesController)
+TaskController.post('/ordertask', orderTaskController)
 
 
 export default TaskController;

@@ -49,20 +49,11 @@ export type getonetaskbody = {
     id: string
 }
 export type ordertaskbody = {
-    ids: string,
-    query: {
-        id: string;
+    TaskIds:string
 
-    },
-    index: string
 }
 export type ordertaskbodyRes = {
-    ids: string,
-    query: {
-        id: string;
-
-    },
-    index: string
+   TaskIds:string
 }
 export type addcatagorybody = {
     name: string,

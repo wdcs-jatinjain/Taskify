@@ -92,6 +92,7 @@ export type tasksData = {
     subCatagory: string,
     status: string,
     priority: string,
+    order:number
 }
 
 export type getTasksReturnDataType = {
@@ -109,6 +110,10 @@ export type editTasksReturnDataType = {
     subCatagory: string,
     status: string,
     priority: string,
+}
+export type updateOrderType = {
+    _id: string,
+    status: string,
 }
 export type getallCatagoriesReturnDataType = {
     _id: string,

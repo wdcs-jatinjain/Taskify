@@ -1,136 +1,164 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import MainLayout from '@/app/layouts/main'
-import Link from 'next/link'
+"use client";
+import React, { useEffect, useState } from "react";
+import MainLayout from "@/app/layouts/main";
+import Link from "next/link";
 import { FiEdit3 } from "react-icons/fi";
-import { MdOutlineDelete } from "react-icons/md";
-import { useRouter } from 'next/navigation';
-import { tasksData } from '@/types';
-import RemoveBtn from '../components/Buttons/RemoveBtn';
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-
-interface Tasks {
-    title: string,
-    description: string,
-    subCatagory: string,
-    status: string,
-    priority: string
-}
-
-
-
+import { tasksData } from "@/types";
+import RemoveBtn from "../components/Buttons/RemoveBtn";
 
 
 function Tasks() {
-    const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState<tasksData[]>([]);
 
-    const handleDragStart = (e: React.DragEvent<HTMLDivElement>, id: string) => {
-        e.dataTransfer.setData('text/plain', id);
-       };
-       
-       const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-       };
-       
-       const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        const draggedItemId = e.dataTransfer.getData('');
-        
-        
+    const onDragEnd = (result: any) => {
+        if (!result.destination) return;
+        const items = Array.from(tasks);
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
 
-        
-       };
+        setTasks(items);
+        // Send the new order to the backend
+        const taskIds = items.map(task => task._id);
+        updateOrderInDatabase(taskIds);
+        };
 
+        const updateOrderInDatabase = async (taskIds: string[]) => {
+        try {
+            const response = await fetch('/api/tasks/update-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ taskIds }),
+            });
 
+            if (!response.ok) {
+            throw new Error('Failed to update order');
+            }
+
+        } catch (error) {
+            console.error('Error updating order:', error);
+        }
+        };
     const fetchData = async () => {
         try {
             const res = await fetch(`/api/task/all-task`, {
-                cache: 'no-store',
+                cache: "no-store",
             });
 
             if (!res.ok) {
-                throw new Error('Failed to fetch the tasks');
+                throw new Error("Failed to fetch the tasks");
             }
 
             const taskData = await res.json();
             setTasks(taskData.data);
         } catch (error) {
-            console.error('Error Loading Topics:', error);
+            console.error("Error Loading Topics:", error);
         }
     };
 
     useEffect(() => {
-
-
         fetchData();
     }, []);
 
-
-
-
-
-    return <MainLayout>
-        <div className="text-black-200 body-font h-screen bg-gray-50">
-            <div className="container px-5 py-24 mx-auto">
-                <div className="flex flex-col text-center w-full mb-20">
-                    <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-indigo-600">Tasks</h1>
-                    <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-600">Keep track of your work!</p>
-                    <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto justify-end">
-                        <Link href={"/task/add"}>
-                            <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add Task</button>
-                        </Link>
-                    </div>
-                </div>
+    return (
+        <MainLayout>
+            <div className="text-black-200 body-font h-screen bg-gray-50">
+                 <div className="container px-5 py-24 mx-auto">
+                     <div className="flex flex-col text-center w-full mb-20">
+                         <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-indigo-600">Tasks</h1>
+                         <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-600">Keep track of your work!</p>
+                         <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto justify-end">
+                             <Link href={"/task/add"}>
+                                 <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add Task</button>
+                             </Link>
+                         </div>
+                     </div>
                 <div className="lg:w-2/3 w-full mx-auto overflow-auto rounded-lg shadow-lg">
-                    <table className="table-auto w-full text-left whitespace-no-wrap rounded-lg overflow-hidden">
-                        <thead>
-                            <tr>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tl">Title</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Description</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Category</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Status</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Priority</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">Edit</th>
-                                <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tr">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tasks && tasks.length > 0 ? (
-
-                                tasks.map((t: tasksData) => (
-
-                                    <tr key={t._id} className="hover:bg-gray-100" draggable onDragStart={(e) => handleDragStart(e, t._id)}>
-                                        <td className="px-4 py-3">{t.title}</td>
-                                        <td className="px-4 py-3">{t.description}</td>
-                                        <td className="px-4 py-3">{t.subCatagory}</td>
-                                        <td className="px-4 py-3 text-lg font-semibold">{t.status}</td>
-                                        <td className="px-4 py-3 text-lg font-semibold">{t.priority}</td>
-                                        <td className="px-4 py-1 text-lg">
-                                            <Link href={`/task/edit/${t._id}`}>
-
-                                                <FiEdit3 size={24} className="text-indigo-600 hover:text-indigo-800" />
-
-                                            </Link>
-                                        </td>
-                                        <td className="px-4 py-1 text-lg">
-                                            <RemoveBtn taskId={t._id} />
-                                        </td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan={7} className='text-center'>No tasks available</td>
-                                </tr>
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        <Droppable droppableId="order">
+                            {(provided: any) => (
+                                <table
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                    className="table-auto w-full text-left whitespace-no-wrap rounded-lg overflow-hidden"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tl">
+                                                Title
+                                            </th>
+                                            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">
+                                                Description
+                                            </th>
+                                            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">
+                                                Category
+                                            </th>
+                                            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">
+                                                Status
+                                            </th>
+                                            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">
+                                                Priority
+                                            </th>
+                                            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200">
+                                                Edit
+                                            </th>
+                                            <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-indigo-200 rounded-tr">
+                                                Delete
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {tasks.map((task, index) => (
+                                            <Draggable
+                                                key={task._id}
+                                                draggableId={task._id}
+                                                index={index}
+                                            >
+                                                {(provided: any) => (
+                                                    <tr
+                                                        {...provided.draggableProps}
+                                                        {...provided.dragHandleProps}
+                                                        ref={provided.innerRef}
+                                                        className={`hover:bg-gray-100`}                                                    
+                                                        >
+                                                        <td className="px-4 py-3">{task.title}</td>
+                                                        <td className="px-4 py-3">{task.description}</td>
+                                                        <td className="px-4 py-3">{task.subCatagory}</td>
+                                                        <td className="px-4 py-3 text-lg font-semibold">
+                                                            {task.status}
+                                                        </td>
+                                                        <td className="px-4 py-3 text-lg font-semibold">
+                                                            {task.priority}
+                                                        </td>
+                                                        <td className="px-4 py-1 text-lg">
+                                                            <Link href={`/task/edit/${task._id}`}>
+                                                                <FiEdit3
+                                                                    size={24}
+                                                                    className="text-indigo-600 hover:text-indigo-800"
+                                                                />
+                                                            </Link>
+                                                        </td>
+                                                        <td className="px-4 py-1 text-lg">
+                                                            <RemoveBtn taskId={task._id} />
+                                                        </td>
+                                                    </tr>
+                                                )}
+                                            </Draggable>
+                                        ))}
+                                        {provided.placeholder}
+                                    </tbody>
+                                </table>
                             )}
-                        </tbody>
-                    </table>
+                        </Droppable>
+                    </DragDropContext>
                 </div>
+               </div>
             </div>
-        </div>
-
-    </MainLayout>
-
-
+        </MainLayout>
+    );
 }
 
-export default Tasks
+export default Tasks;
