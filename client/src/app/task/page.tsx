@@ -78,7 +78,7 @@ function Tasks() {
                      </div>
                 <div className="lg:w-2/3 w-full mx-auto overflow-auto rounded-lg shadow-lg">
                     <DragDropContext onDragEnd={onDragEnd}>
-                        <Droppable droppableId="order">
+                        <Droppable droppableId="tasks">
                             {(provided: any) => (
                                 <table
                                     {...provided.droppableProps}
