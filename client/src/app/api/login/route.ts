@@ -21,10 +21,19 @@ export async function POST(req: Request) {
             cookies().set('id', LoginData?.userId as string)
             return NextResponse.json(LoginData)
         } else {
+            let errorMessage = "An error occurred during login.";
+            if (LoginData.errorCode === 'INVALID_EMAIL') {
+                errorMessage = "The email address is not valid.";
+            } else if (LoginData.errorCode === 'INCORRECT_PASSWORD') {
+                errorMessage = "The password is incorrect.";
+            } else if (LoginData.errorCode === 'USER_NOT_FOUND') {
+                errorMessage = "Account does not exist or is not registered.";
+            }
+
             return NextResponse.json({
                 status: RESULT_STATUS.FAILURE,
-                message: "Something went wrong while creating user"
-            })
+                message: errorMessage
+            });
         }
     } catch (error) {
         console.error('Error loging user:', error);

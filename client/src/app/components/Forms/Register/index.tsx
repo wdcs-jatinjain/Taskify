@@ -172,6 +172,7 @@ export default function RegistrationForm() {
                     ))}
 
                 </select>
+                <span className="text-red-500">{errors.catagories?.message}</span>
             </div>
 
 

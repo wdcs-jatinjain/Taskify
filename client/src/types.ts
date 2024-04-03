@@ -8,6 +8,7 @@ export type RegisterDataType = {
 }
 
 export type LoginDataType = {
+    errorCode: string;
     status: string,
     message: string,
 

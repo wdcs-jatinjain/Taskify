@@ -65,20 +65,23 @@ function Tasks() {
 
     return (
         <MainLayout>
-            <div className="text-black-200 body-font h-screen bg-gray-50">
+            <div className="text-black-200 sm:rounded-lg body-font h-screen bg-gray-50">
                  <div className="container px-5 py-24 mx-auto">
                      <div className="flex flex-col text-center w-full mb-20">
-                         <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-indigo-600">Tasks</h1>
-                         <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-600">Keep track of your work!</p>
+                            <div className="flex  ">
+
+                                <Link href={"/task"} className="inline-flex pl-2 text-indigo-600 items-center border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 hover:text-white rounded text-base mt-4 md:mt-0" aria-current="page">Tasks</Link>
+
+                            </div>
                          <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto justify-end">
                              <Link href={"/task/add"}>
                                  <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add Task</button>
                              </Link>
                          </div>
                      </div>
-                <div className="lg:w-2/3 w-full mx-auto overflow-auto rounded-lg shadow-lg">
+                <div className="w-full mx-auto overflow-auto rounded-lg shadow-lg">
                     <DragDropContext onDragEnd={onDragEnd}>
-                        <Droppable droppableId="tasks">
+                        <Droppable droppableId="order">
                             {(provided: any) => (
                                 <table
                                     {...provided.droppableProps}
@@ -110,6 +113,9 @@ function Tasks() {
                                             </th>
                                         </tr>
                                     </thead>
+                                        {tasks.length === 0 ? (
+                                            <p >No Task Available </p>
+                                        ):(
                                     <tbody>
                                         {tasks.map((task, index) => (
                                             <Draggable
@@ -149,7 +155,9 @@ function Tasks() {
                                             </Draggable>
                                         ))}
                                         {provided.placeholder}
+                                        
                                     </tbody>
+                                    )}
                                 </table>
                             )}
                         </Droppable>

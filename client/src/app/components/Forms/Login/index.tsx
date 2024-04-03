@@ -42,12 +42,26 @@ const LoginFormComponent = () => {
                 return NextResponse.json(formData);
             }
             if (loginData.status === RESULT_STATUS.FAILURE) {
-                setErrorMessage(loginData.message);
+                let errorMessage = "An error occurred during login. Please try again later.";
+                switch (loginData.errorCode) {
+                    case 'INVALID_EMAIL':
+                        errorMessage = "The email address is not valid.";
+                        break;
+                    case 'INCORRECT_PASSWORD':
+                        errorMessage = "The password is incorrect.";
+                        break;
+                    case 'USER_NOT_FOUND':
+                        errorMessage = "Account does not exist or is not registered.";
+                        break;
+                    default:
+                        errorMessage = loginData.message; // Fallback to the generic message
+                }
+                setErrorMessage(errorMessage);
             }
 
         } catch (error) {
             console.error('Error while login:', error);
-            setErrorMessage("An error occurred during login. Please try again later.");
+            setErrorMessage("An error occurred during login Please try again later.");
             return NextResponse.error()
 
         }
