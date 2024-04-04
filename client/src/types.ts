@@ -38,6 +38,20 @@ export type RegisterSubmitHandlerType = {
     email: string;
     password: string;
 }
+export type getUserDataRes = {
+
+    name: string;
+    email: string;
+    password: string;
+    status: string;
+}
+export type getUserDataType = {
+  
+    name: string;
+    email: string;
+    password: string;
+    status: string;
+}
 
 
 

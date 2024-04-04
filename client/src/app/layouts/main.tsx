@@ -1,15 +1,15 @@
 // src/app/components/layouts/MainLayout.tsx
 import React, { ReactNode } from 'react';
-import Navbar from '../components/Navbar';
+import NavbarComponent from '../components/Navbar';
 
 type MainLayoutProps = {
     children: ReactNode;
 };
 
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = ({ children }: MainLayoutProps,{ params }: any) => {
     return (
         <div>
-            <header><Navbar /></header>
+            <header><NavbarComponent /></header>
             <main>{children}</main>
         </div>
     );

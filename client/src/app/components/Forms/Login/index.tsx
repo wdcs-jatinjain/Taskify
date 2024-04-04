@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { NextResponse } from 'next/server';
 import { LoginSubmitHandlerType } from '@/types';
+import { Card } from '@nextui-org/react';
 
 const LoginFormComponent = () => {
     const router = useRouter()
@@ -71,8 +72,8 @@ const LoginFormComponent = () => {
 
 
     return (
-        <div className=''>
-
+        <div className="flex flex-col w-full">
+ <Card className="max-w-full w-[340px] h-[400px]">
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="grid grid-cols-1 gap-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md">
@@ -131,6 +132,7 @@ const LoginFormComponent = () => {
                 </div>
 
             </form>
+            </Card>
         </div>
     )
 }

@@ -11,6 +11,7 @@ import { RESULT_STATUS } from '@/constants';
 import { NextResponse } from 'next/server';
 import Link from 'next/link';
 import { RegisterSubmitHandlerType } from '@/types';
+import { Card } from '@nextui-org/react';
 
 
 export default function RegistrationForm() {
@@ -83,6 +84,8 @@ export default function RegistrationForm() {
 
 
     return (
+        <div className="flex flex-col w-full">
+        <Card className="max-w-full w-[340px] h-[600px]">
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
@@ -191,5 +194,7 @@ export default function RegistrationForm() {
                 <p className='text-black'>Already have an account <Link href={"login"} className='text-blue-500'>Login now!</Link></p>
             </div>
         </form>
+        </Card>
+        </div>
     );
 }

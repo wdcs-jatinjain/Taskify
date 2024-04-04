@@ -45,6 +45,12 @@ export type finduserRes = {
 
     };
 }
+export type getUserDataRes = {
+    query: {
+        id: string;
+
+    };
+}
 export type getonetaskbody = {
     id: string
 }

@@ -70,7 +70,6 @@ function Tasks() {
                      <div className="flex flex-col text-center w-full mb-20">
                             <div className="flex  ">
 
-                                <Link href={"/task"} className="inline-flex pl-2 text-indigo-600 items-center border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 hover:text-white rounded text-base mt-4 md:mt-0" aria-current="page">Tasks</Link>
 
                             </div>
                          <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto justify-end">
