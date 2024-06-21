@@ -1,9 +1,15 @@
+import Task from "./task/page";
 
+import * as React from "react";
 
+import {NextUIProvider} from "@nextui-org/system";
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      welcome to the Taskify
-    </main>
+    <>
+      <NextUIProvider>
+
+      <Task />
+      </NextUIProvider>
+    </>
   );
 }
